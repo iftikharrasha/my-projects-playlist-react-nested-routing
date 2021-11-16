@@ -1,0 +1,291 @@
+@import './variables';
+@import './playlist';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    @media (max-width: 375.5px) {
+        font-size: 8px;
+    }
+    @media (min-width: 376px) and (max-width: 575.98px) {
+        font-size: 10px;
+    }
+    @media (min-width: 576px) and (max-width: 1531.98px) {
+        font-size: 12px;
+    }
+}
+
+body {
+    font-family: $ff1;
+    background-color: $primary;
+    color: $accent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: all 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar {
+width: 0.1875rem;
+}
+
+::-webkit-scrollbar-track {
+-webkit-border-radius: 0.625rem;
+border-radius: 0.625rem;
+}
+
+::-webkit-scrollbar-thumb {
+-webkit-border-radius: 0.625rem;
+border-radius: 0.625rem;
+background: $secondary;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+background: $secondary;
+}
+
+h1,h2,h3,h4,h5,h6,p{
+	margin:0;
+	padding:0;
+    font-weight: 500;
+}
+
+ul{
+	margin: 0;
+	padding:0;
+	list-style: none;
+}
+
+a{
+	margin:0;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+a, select , input , textarea , button{
+	outline: none !important;
+}
+
+.btn:focus, .btn.focus, .form-control:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn-link:focus, .btn-link.focus {
+    text-decoration: none;
+}
+
+.reg--24{
+    @include fontMaker($ff1, none);
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
+
+.reg--36{
+    @include fontMaker($ff1, none);
+    font-size: 2.25rem;
+    @media (max-width: 1299.98px) {
+        font-size: 1.5rem;
+    }
+}
+
+.reg--54{
+    @include fontMaker($ff1, none);
+    font-size: 3.375rem;
+}
+
+.lit--18{
+    @include fontMaker($ff3, none);
+    font-size: 1.125rem;
+    line-height: 1.8rem;
+}
+
+.lit--28{
+    @include fontMaker($ff3, uppercase);
+    font-size: 1.75rem;
+}
+
+.bigReg--150{
+    @include fontMaker($ff4, uppercase);
+    font-size: 9.375rem;
+    line-height: 8.45rem;
+    @media (max-width: 575.98px) {
+        font-size: 4rem;
+        line-height: 3.5rem;
+    }
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        font-size: 5.5rem;
+        line-height: 5.5rem;
+    }
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        font-size: 5.5rem;
+        line-height: 5.5rem;
+    }
+    @media (min-width: 992px) and (max-width: 1299.98px) {
+        font-size: 6.5rem;
+        line-height: 6.5rem;
+    }
+}
+
+.bigReg--100{
+    @include fontMaker($ff4, none);
+    font-size: 6.25rem;
+    @media (max-width: 575.98px) {
+        font-size: 4.25rem;
+    }
+}
+
+.bigReg--54{
+    @include fontMaker($ff4, uppercase);
+    font-size: 3.375rem;
+}
+
+.bigReg--32{
+    @include fontMaker($ff4, none);
+    font-size: 2rem;
+}
+
+.bigReg--18{
+    @include fontMaker($ff4, none);
+    font-size: 1.2rem;
+}
+
+.bigReg--68{
+    @include fontMaker($ff4, uppercase);
+    font-size: 4.25rem;
+    @media (max-width: 575.98px) {
+        font-size: 3rem;
+    }
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        font-size: 3.5rem;
+    }
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        font-size: 3.5rem;
+    }
+}
+
+.bigBold--68{
+    @include fontMaker($ff5, uppercase);
+    font-size: 4.25rem;
+    @media (max-width: 575.98px) {
+        font-size: 3rem;
+    }
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        font-size: 3.5rem;
+    }
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        font-size: 3.5rem;
+    }
+}
+
+.bar--18{
+    @include fontMaker($ff6, none);
+    font-size: 2rem;
+    @media (max-width: 575.98px) {
+        font-size: 2.5rem;
+    }
+}
+
+.bar--64{
+    @include fontMaker($ff6, uppercase);
+    font-size: 4rem;
+}
+
+.bar--68{
+    @include fontMaker($ff6, uppercase);
+    font-size: 4.25rem;
+    @media (max-width: 575.98px) {
+        font-size: 3rem;
+    }
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        font-size: 3.5rem;
+    }
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        font-size: 3.5rem;
+    }
+}
+
+.wrapper{
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1640px;
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        padding: 0 3rem;
+    }
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        padding: 0 3rem;
+    }
+    @media (min-width: 992px) and (max-width: 1531.98px) {
+        padding: 0 5rem;
+    }
+}
+
+.text--center{
+    text-align: center;
+}
+
+.my--4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn--1 {
+    @include flexCenter;
+    background: transparent;
+    border: none;
+    position: relative;
+    .tick {
+        position: absolute;
+        left: -17%;
+        width: 5rem;
+        transition: all .3s ease-in-out;
+        z-index: 1;
+    }
+    .circle {
+        width: 5.625rem;
+        height: 5.625rem;
+        stroke-dasharray: 25;
+        stroke-dashoffset: 25;
+        animation: dash 5s linear infinite;
+        fill: transparent;
+        stroke: $accent;
+        circle {
+            cx: 2.8125rem;
+            cy: 2.8125rem;
+            r: 2.8125rem;
+        }
+        @keyframes dash{
+            0%{
+                stroke-dashoffset: 50;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+    }
+    a, input {
+        transition: all .3s ease-in-out;
+        color: $accent;
+        margin-left: 1.5rem;
+        border: none;
+        background: transparent;
+    }
+    &:hover {
+        a, input {
+            transform: scale(1.05);
+        }
+        .tick {
+            transform: translateX(2rem);
+        }
+    }
+}

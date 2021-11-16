@@ -1,0 +1,54 @@
+@font-face {
+    font-family: Raleway;
+    src: url(../Fonts/Raleway.ttf);
+}
+
+@font-face {
+    font-family: Raleway_Italic;
+    src: url(../Fonts/Raleway_Italic.ttf);
+}
+
+@font-face {
+    font-family: Raleway_Light;
+    src: url(../Fonts/Raleway_Light.ttf);
+}
+
+@font-face {
+    font-family: Bigilla;
+    src: url(../Fonts/Bigilla.woff2);
+}
+
+@font-face {
+    font-family: Bigilla_Bold;
+    src: url(../Fonts/Bigilla_Bold.woff2);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Extended+Text&display=swap');
+  
+:root {
+    --primary: #121212;
+    --accent: #F9F5EF;
+    --secondary: #F4DD1E;
+}
+
+$primary: var(--primary);
+$accent: var(--accent);
+$secondary: var(--secondary);
+$ff1: 'Raleway', 'san-serif';
+$ff2: 'Raleway_Italic', 'san-serif';
+$ff3: 'Raleway_Light', 'san-serif';
+$ff4: 'Bigilla', 'san-serif';
+$ff5: 'Bigilla_Bold', 'san-serif';
+$ff6: 'Libre Barcode 39 Extended Text', 'cursive';
+
+@mixin fontMaker($family, $case) {
+    font-family: $family;
+    text-transform: $case;
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
