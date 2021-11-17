@@ -32,7 +32,7 @@ const AppStore = () => {
                             <div className="playlist__details">
                                 <Switch>
                                     <Route exact path={path}>
-                                        
+                                        <FullStack/>
                                     </Route>
                                     <Route path={`${path}/full-stack`}>
                                         <FullStack/>
