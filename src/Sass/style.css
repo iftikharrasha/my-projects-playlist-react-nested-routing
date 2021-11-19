@@ -35,6 +35,7 @@
 }
 
 .playlist .playlist__content {
+  position: relative;
   -webkit-transition: 0.3s ease-out;
   transition: 0.3s ease-out;
   will-change: transform;
@@ -132,14 +133,16 @@
   overflow: hidden;
   -webkit-transition: all .3s;
   transition: all .3s;
-  z-index: 1;
+  z-index: 999;
   visibility: hidden;
   opacity: 0;
+  min-height: 45rem;
+  background-color: var(--primary);
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content {
   position: relative;
-  background-color: var(--primary);
+  background-color: var(--accent);
   text-align: center;
   padding: 3rem 2rem 2rem;
   border-radius: 1rem 1rem 0 0;
@@ -152,7 +155,7 @@
 @media screen and (min-width: 576px) {
   .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content {
     margin: auto;
-    width: 23rem;
+    width: 100%;
     border-radius: 1.25rem;
   }
 }
@@ -162,11 +165,11 @@
   display: -ms-inline-flexbox;
   display: inline-flex;
   border-radius: .25rem;
-  color: var(--accent);
-  font-size: 1.5rem;
+  color: var(--primary);
+  font-size: 2.5rem;
   position: absolute;
   top: 2rem;
-  right: 2rem;
+  right: 3rem;
   cursor: pointer;
 }
 
@@ -174,25 +177,81 @@
   color: black;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content button {
-  width: 90%;
-  display: inline-block;
-  background-color: var(--accent);
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__logo img {
+  width: 12rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__logo .content__text {
+  padding-left: 2rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__logo .content__text p {
   color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__logo .content__text a button {
+  width: 100%;
+  background-color: var(--primary);
+  color: var(--accent);
   padding: 1rem 1.25rem;
   border-radius: 0.5rem;
+  border: none;
   -webkit-transition: .3s;
   transition: .3s;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__logo .content__text a button:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__desc {
+  margin: 3rem 0;
+  text-align: left;
+  color: var(--primary);
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__thumb img {
+  width: 100%;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .show-modal {
   visibility: visible;
   opacity: 1;
+  overflow: visible;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .show-modal .modal__content {
   -webkit-transform: translateY(0);
           transform: translateY(0);
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .redirect {
+  position: absolute;
+  color: var(--accent);
+  bottom: 0;
+  right: 0;
+  padding: 1rem;
+  padding-right: 2rem;
 }
 
 * {

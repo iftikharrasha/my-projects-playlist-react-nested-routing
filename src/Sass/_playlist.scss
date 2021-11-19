@@ -1,6 +1,7 @@
 .playlist{
     padding: 7rem 0;
     .playlist__content{
+        position: relative;
         transition: 0.3s ease-out;
         will-change: transform;
         .playlist__container{
@@ -58,12 +59,14 @@
                     align-items: flex-end;
                     overflow: hidden;
                     transition: all .3s;
-                    z-index: 1;
+                    z-index: 999;
                     visibility: hidden;
                     opacity: 0;
+                    min-height: 45rem;
+                    background-color: $primary;
                     .modal__content{
                         position: relative;
-                        background-color: $primary;
+                        background-color: $accent;
                         text-align: center;
                         padding: 3rem 2rem 2rem;
                         border-radius: 1rem 1rem 0 0;
@@ -71,39 +74,83 @@
                         transform: translateY(10%);
                         @media screen and (min-width: 576px){
                             margin: auto;
-                            width: 23rem;
+                            width: 100%;
                             border-radius: 1.25rem;
                         }
                         .modal__close{
                             display: inline-flex;
                             border-radius: .25rem;
-                            color: $accent;
-                            font-size: 1.5rem;
+                            color: $primary;
+                            font-size: 2.5rem;
                             position: absolute;
                             top: 2rem;
-                            right: 2rem;
+                            right: 3rem;
                             cursor: pointer;
                             h2{
                                 color: black;
                             }
                         }
-                        button {
-                            width: 90%;
-                            display: inline-block;
-                            background-color: $accent;
-                            color: $primary;
-                            padding: 1rem 1.25rem;
-                            border-radius: 0.5rem;
-                            transition: .3s;
+                        .content__details{
+                            .content__logo{
+                                @include flexCenter;
+                                justify-content: flex-start;
+                                img{
+                                    width: 12rem;
+                                }
+                                .content__text{
+                                    padding-left: 2rem;
+                                    p{
+                                        color: $primary;
+                                        margin-bottom: 1rem;
+                                    }
+                                    a{
+                                        button {
+                                            width: 100%;
+                                            background-color: $primary;
+                                            color: $accent;
+                                            padding: 1rem 1.25rem;
+                                            border-radius: 0.5rem;
+                                            border: none;
+                                            transition: .3s;
+                                            font-size: 1.25rem;
+                                            font-weight: 500;
+                                            cursor: pointer;
+                                            &:hover{
+                                                background-color: $secondary;
+                                                color: $primary;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .content__desc{
+                                margin: 3rem 0;
+                                text-align: left;
+                                color: $primary;
+                            }
+                            .content__thumb{
+                                img{
+                                    width: 100%;
+                                }
+                            }
                         }
                     }
                 }
                 .show-modal{
                     visibility: visible;
                     opacity: 1;
+                    overflow: visible;
                     .modal__content{
                         transform: translateY(0);
                     }
+                }
+                .redirect{
+                    position: absolute;
+                    color: $accent;
+                    bottom: 0;
+                    right: 0;
+                    padding: 1rem;
+                    padding-right: 2rem;
                 }
             }
         }
