@@ -312,7 +312,7 @@
   text-transform: uppercase;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__thumb img {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__ui img {
   width: 100%;
   border-radius: 0.3rem;
 }
@@ -326,6 +326,10 @@
           transform: translateX(1.25rem);
   -webkit-transition: all .3s;
   transition: all .3s;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra a {
+  color: var(--accent);
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon {

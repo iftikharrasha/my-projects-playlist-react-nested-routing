@@ -179,7 +179,7 @@
                                     }
                                 }
                             }
-                            .content__thumb{
+                            .content__ui{
                                 img{
                                     width: 100%;
                                     border-radius: 0.3rem;
@@ -194,6 +194,9 @@
                         right: 0;
                         transform: translateX(1.25rem);
                         transition: all .3s;
+                        a{
+                            color: $accent;
+                        }
                         .extra__icon{
                             @include flexCenter;
                             flex-direction: column;

@@ -6,8 +6,7 @@ import {
     Link,
     useRouteMatch
 } from "react-router-dom";
-import FullStack from '../Apps/FullStack/FullStack';
-import PsdToHtml from '../Apps/PsdToHtml/PsdToHtml';
+import AppDetail from '../AppDetail/AppDetail';
 
 const AppStore = () => {
     let { path, url } = useRouteMatch();
@@ -40,13 +39,10 @@ const AppStore = () => {
                             <div className="playlist__details">
                                 <Switch>
                                     <Route exact path={path}>
-                                        <FullStack/>
+                                        <AppDetail/>
                                     </Route>
-                                    <Route path={`${path}/full-stack`}>
-                                        <FullStack/>
-                                    </Route>
-                                    <Route path={`${path}/psd-to-html`}>
-                                        <PsdToHtml/>
+                                    <Route path={`${path}/:categoryPath`}>
+                                        <AppDetail/>
                                     </Route>
                                 </Switch>
 
