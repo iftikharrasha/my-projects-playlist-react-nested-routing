@@ -1,0 +1,9 @@
+.footer{
+    .copyright{
+        padding:7rem 0 2rem 0;
+        @include flexCenter;
+        a{
+            color: $secondary;
+        }
+    }
+}

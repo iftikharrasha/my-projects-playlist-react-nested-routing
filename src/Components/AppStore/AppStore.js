@@ -14,11 +14,11 @@ const AppStore = () => {
     const [active, setActive] = useState(false);
 
     const categories = [
-        { id: 1, name: "Full Stack", to: "full-stack", className: "nav_item", idName: "full" },
-        { id: 2, name: "PSD to HTML", to: "psd-to-html", className: "nav_item", idName: "psd" },
-        { id: 3, name: "Email Templates", to: "email-temps", className: "nav_item", idName: "email" },
+        { id: 1, name: "Full Stack Projects", to: "full-stack", className: "nav_item", idName: "full" },
+        { id: 2, name: "Front End Projects", to: "psd-to-html", className: "nav_item", idName: "psd" },
+        { id: 3, name: "Email Templates", to: "email-templates", className: "nav_item", idName: "email" },
         { id: 4, name: "API Integration", to: "api-integration", className: "nav_item", idName: "api" },
-        { id: 5, name: "UI/UX", to: "ui-ux", className: "nav_item", idName: "ui" }
+        { id: 5, name: "UI/UX Design", to: "ui-ux-design", className: "nav_item", idName: "ui" }
     ];
 
     return (

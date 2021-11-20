@@ -1,5 +1,5 @@
 .playlist{
-    padding: 7rem 0;
+    padding: 2rem 0;
     .playlist__content{
         position: relative;
         transition: 0.3s ease-out;
@@ -8,14 +8,40 @@
             display: flex;
             justify-content: space-between;
             padding:5rem 0;
+            @media (max-width: 575.98px) {
+                flex-wrap: wrap;
+            }
             .playlist__sidebar{
                 width: 20%;
+                @media (max-width: 575.98px) {
+                    width: 100%; 
+                }
+                @media (min-width: 576px) and (max-width: 991.98px) {
+                    width: 27%; 
+                }
                 ul{
                     padding:2rem 0;
                     li{
                         padding: 0.5rem;
+                        margin: 0.5rem;
+                        border-radius: 0.3rem;
+                        background-color: $secondary;
+                        border-left: 1rem solid rgba(0, 0, 0, 0);
+                        &:hover {
+                            background-color: $primary;
+                            border-left: 0.1rem solid $accent;
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+                            a{
+                                color: $accent;
+                            }
+                        }
+                        @media (max-width: 575.98px) {
+                            text-align: center;
+                        }
                         a{
-                            color: $accent;
+                            color: $primary;
+                            display: block;
                         }
                     }
                 }
@@ -25,6 +51,12 @@
                 background-color: $accent;
                 border-radius: 1.75rem;
                 min-height: 45rem;
+                @media (max-width: 575.98px) {
+                    width: 100%;
+                }
+                @media (min-width: 576px) and (max-width: 991.98px) {
+                    width: 73%;
+                }
                 .app__inside{
                     @include flexCenter;
                     flex-wrap: wrap;
@@ -33,7 +65,7 @@
                         display: flex;
                         flex-direction: column;
                         text-align: center;
-                        margin: 2rem 2rem 0 2rem;
+                        margin: 2rem;
                         button{
                             cursor: pointer;
                             background-color: transparent;
@@ -74,7 +106,7 @@
                         transform: translateY(10%);
                         @media screen and (min-width: 576px){
                             margin: auto;
-                            width: 100%;
+                            width: 90%;
                             border-radius: 1.25rem;
                         }
                         .modal__close{
@@ -102,12 +134,11 @@
                                     p{
                                         color: $primary;
                                         margin-bottom: 1rem;
+                                        font-weight: 700;
                                     }
                                     a{
                                         button {
                                             width: 100%;
-                                            background-color: $primary;
-                                            color: $accent;
                                             padding: 1rem 1.25rem;
                                             border-radius: 0.5rem;
                                             border: none;
@@ -115,9 +146,11 @@
                                             font-size: 1.25rem;
                                             font-weight: 500;
                                             cursor: pointer;
+                                            background-color: $secondary;
+                                            color: $primary;
                                             &:hover{
-                                                background-color: $secondary;
-                                                color: $primary;
+                                                background-color: $primary;
+                                                color: $accent;
                                             }
                                         }
                                     }
@@ -127,11 +160,48 @@
                                 margin: 3rem 0;
                                 text-align: left;
                                 color: $primary;
+                                h4, p{
+                                    margin-bottom: 1rem;
+                                }
+                                h4{
+                                    text-decoration: underline;
+                                }
+                                ul{
+                                   @media (min-width: 576px) {
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                   }
+                                   padding-bottom: 1rem;
+                                    li{
+                                        list-style: disc;
+                                        margin-left: 3rem;
+                                        text-transform: uppercase;
+                                    }
+                                }
                             }
                             .content__thumb{
                                 img{
                                     width: 100%;
+                                    border-radius: 0.3rem;
                                 }
+                            }
+                        }
+                    }
+                    .content__extra{
+                        display: none;
+                        position: absolute;
+                        top: 2rem;
+                        right: 0;
+                        transform: translateX(1.25rem);
+                        transition: all .3s;
+                        .extra__icon{
+                            @include flexCenter;
+                            flex-direction: column;
+                            margin-bottom: 1.5rem;
+                            img{
+                                width: 4rem;
+                                border-radius: 50%;
+                                margin-bottom: 0.5rem;
                             }
                         }
                     }
@@ -142,6 +212,12 @@
                     overflow: visible;
                     .modal__content{
                         transform: translateY(0);
+                    }
+                    .content__extra{
+                        display: block;
+                        @media (max-width: 991.98px) {
+                            display: none;
+                        }
                     }
                 }
                 .redirect{
