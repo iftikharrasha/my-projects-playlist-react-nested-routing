@@ -4,11 +4,16 @@ import {
 } from "react-router-dom";
 import { useParams } from 'react-router';
 import igot from '../../Image/igot.png';
+import github from '../../Image/github.svg';
+import portfolio from '../../Image/portfolio.svg';
 import fiverr from '../../Image/fiverr.svg';
+import behance from '../../Image/behance.svg';
+import loader from '../../Image/loader.gif';
 
 const FullStack = () => {
     const { categoryPath } = useParams();
     
+    const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState([]);
     const [details, setDetails] = useState([]);
     const [techs, setTechs] = useState([]);
@@ -16,13 +21,19 @@ const FullStack = () => {
     useEffect(() => {
         let url;
         if(categoryPath === undefined) {
-            url = `http://localhost:5000/projects/full-stack`;
+            url = `http://localhost:5000/projects/psd-to-html`;
         }else{
             url = `http://localhost:5000/projects/${categoryPath}`;
         }
         fetch(url)
         .then(res => res.json())
-        .then(data => setProjects(data));
+        .then(data => {
+            setProjects(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => setIsLoading(false));
     }, [projects])
 
     
@@ -32,6 +43,26 @@ const FullStack = () => {
         modalContainer.classList.add('show-modal');
         setDetails(project);
         setTechs(project.techs);
+        loadViews(project._id);
+    }
+
+    const loadViews = (id) => {
+        let url = `http://localhost:5000/views/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(projects)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0){
+                setProjects(projects);
+            }else{
+                console.log('HELLOW KITTY');
+            }
+        })
     }
 
     const handleClose = (e) => {
@@ -40,18 +71,50 @@ const FullStack = () => {
         e.preventDefault();
     }
 
+    const handleReact = (id) => {
+        let url = `http://localhost:5000/reaction/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(projects)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0){
+                document.getElementById('icon-heart').style.color = 'red';
+                setDetails(projects[0]);
+                setProjects(projects);
+                console.log('hitted');
+            }else{
+                document.getElementById('icon-heart').style.color = 'green';
+                console.log('else hit');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     return (
         <>
             <div className="app__inside">
                 {
-                    projects.map((project) => (
-                        <div className="app__single" key={project.id}>
-                            <button className="reg--24" onClick={() => handleModal(project)}>
-                                <img src={project.logo} alt="logo"/>
-                                <p className="lit--18">{project.title}</p>
-                            </button>
-                        </div>
+                    !isLoading && projects.map((project) => (
+                                    <div className="app__single" key={project.id}>
+                                        <button className="reg--24" onClick={() => handleModal(project)}>
+                                            <img src={project.logo} alt="logo"/>
+                                            <p className="lit--18">{project.title}</p>
+                                        </button>
+                                    </div>
                     ))
+                }
+
+                {
+                    isLoading &&    <div className="loader">
+                                        <img src={loader} alt={loader}/>
+                                    </div>
                 }
             </div>
 
@@ -76,7 +139,7 @@ const FullStack = () => {
                             <ul>
                                 {
                                     techs.map(tech => (
-                                        <li className="reg--24" key={details.id}>{tech.tool}</li>
+                                        <li className="reg--24" key={tech.no}>{tech.tool}</li>
                                     ))
                                 }
                             </ul>
@@ -88,26 +151,48 @@ const FullStack = () => {
                 </div>
 
                 <div className="content__extra">
-                    <Link to={details.repoClient}>
+                    <Link to={details.repo} target="_blank" rel="noopener noreferrer">
                         <div className="extra__icon">
-                            <img src={igot} alt={igot}/>
-                            <p>Repo</p>
+                            <img src={github} alt={github}/>
+                            <p>Git Repo</p>
                         </div>
                     </Link>
 
+                    <Link to={details.behance} target="_blank" rel="noopener noreferrer">
+                        <div className="extra__icon">
+                            <img src={behance} alt={behance}/>
+                            <p>Behance</p>
+                        </div>
+                    </Link>
+
+                    <a href="http://iftikharrasha.com/" target="_blank" rel="noopener noreferrer">
+                        <div className="extra__icon">
+                            <img src={portfolio} alt={portfolio}/>
+                            <p>Porfolio</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.fiverr.com/iftikharrasha/" target="_blank" rel="noopener noreferrer">
+                        <div className="extra__icon">
+                            <img src={fiverr} alt={fiverr}/>
+                            <p>Fiverr</p>
+                        </div>
+                    </a>
+
                     <div className="extra__icon">
-                        <img src={igot} alt={igot}/>
-                        <p>Porfolio</p>
+                        <button type="button" className="react" onClick={() => handleReact(details._id)}>
+                            <i className="fa fa-heart" id="icon-heart"></i>
+                            <p>{details.loves}</p>
+                        </button>
+                        <p>Likes</p>
                     </div>
 
                     <div className="extra__icon">
-                        <img src={fiverr} alt={fiverr}/>
-                        <p>Fiverr</p>
-                    </div>
-
-                    <div className="extra__icon">
-                        <img src={fiverr} alt={fiverr}/>
-                        <p>Behance</p>
+                        <button type="button" className="react">
+                            <i className="fa fa-eye" id="icon-heart"></i>
+                            <p>{details.views}</p>
+                        </button>
+                        <p>Views</p>
                     </div>
                 </div>
             </div>

@@ -30,8 +30,16 @@
   --secondary: #F4DD1E;
 }
 
+.header nav {
+  margin: 3rem 0;
+}
+
+.header nav h2 a {
+  color: var(--accent);
+}
+
 .playlist {
-  padding: 2rem 0;
+  padding-bottom: 3rem;
 }
 
 .playlist .playlist__content {
@@ -64,7 +72,8 @@
 
 @media (max-width: 575.98px) {
   .playlist .playlist__content .playlist__container .playlist__sidebar {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
   }
 }
 
@@ -112,7 +121,7 @@
   width: 80%;
   background-color: var(--accent);
   border-radius: 1.75rem;
-  min-height: 45rem;
+  min-height: 30rem;
 }
 
 @media (max-width: 575.98px) {
@@ -168,7 +177,26 @@
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .app__inside .app__single button p {
-  color: black;
+  font-weight: 600;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .app__inside .loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 30rem;
+  margin: auto;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .app__inside .loader img {
+  width: 4rem;
+  border-radius: 0.5rem;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container {
@@ -189,7 +217,7 @@
   z-index: 999;
   visibility: hidden;
   opacity: 0;
-  min-height: 45rem;
+  min-height: 30rem;
   background-color: var(--primary);
 }
 
@@ -350,9 +378,24 @@
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon img {
-  width: 4rem;
+  width: 3.2rem;
   border-radius: 50%;
   margin-bottom: 0.5rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon button {
+  background-color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 0;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon button p {
+  font-size: 0.8rem;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .show-modal {

@@ -1,5 +1,5 @@
 .playlist{
-    padding: 2rem 0;
+    padding-bottom: 3rem;
     .playlist__content{
         position: relative;
         transition: 0.3s ease-out;
@@ -14,7 +14,8 @@
             .playlist__sidebar{
                 width: 20%;
                 @media (max-width: 575.98px) {
-                    width: 100%; 
+                    width: 90%;
+                    margin: 0 auto;
                 }
                 @media (min-width: 576px) and (max-width: 991.98px) {
                     width: 27%; 
@@ -50,7 +51,7 @@
                 width: 80%;
                 background-color: $accent;
                 border-radius: 1.75rem;
-                min-height: 45rem;
+                min-height: 30rem;
                 @media (max-width: 575.98px) {
                     width: 100%;
                 }
@@ -75,8 +76,17 @@
                                 height: 7rem;
                             }
                             p{
-                                color: black;
+                                font-weight: 600;
                             }
+                        }
+                    }
+                    .loader{
+                        @include flexCenter;
+                        min-height: 30rem;
+                        margin: auto;
+                        img{
+                            width: 4rem;
+                            border-radius: 0.5rem;
                         }
                     }
                 }
@@ -94,7 +104,7 @@
                     z-index: 999;
                     visibility: hidden;
                     opacity: 0;
-                    min-height: 45rem;
+                    min-height: 30rem;
                     background-color: $primary;
                     .modal__content{
                         position: relative;
@@ -202,9 +212,22 @@
                             flex-direction: column;
                             margin-bottom: 1.5rem;
                             img{
-                                width: 4rem;
+                                width: 3.2rem;
                                 border-radius: 50%;
                                 margin-bottom: 0.5rem;
+                            }
+                            button{
+                                background-color: white;
+                                cursor: pointer;
+                                font-size: 1.2rem;
+                                width: 3.2rem;
+                                height: 3.2rem;
+                                border:  0;
+                                border-radius: 50%;
+                                margin-bottom: 0.5rem;
+                                p{
+                                    font-size: 0.8rem;
+                                }
                             }
                         }
                     }
