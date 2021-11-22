@@ -17,8 +17,11 @@
                     width: 90%;
                     margin: 0 auto;
                 }
+                @media (min-width: 576px) and (max-width: 1299.98px) {
+                    width: 27%;
+                }
                 @media (min-width: 576px) and (max-width: 991.98px) {
-                    width: 27%; 
+                    width: 30%;
                 }
                 ul{
                     padding:2rem 0;
@@ -55,13 +58,19 @@
                 @media (max-width: 575.98px) {
                     width: 100%;
                 }
-                @media (min-width: 576px) and (max-width: 991.98px) {
+                @media (min-width: 576px) and (max-width: 1299.98px) {
                     width: 73%;
+                }
+                @media (min-width: 576px) and (max-width: 767.98px) {
+                    width: 70%;
+                }
+                @media (min-width: 768px) and (max-width: 991.98px) {
+                    width: 70%;
                 }
                 .app__inside{
                     @include flexCenter;
                     flex-wrap: wrap;
-                    justify-content: flex-start;
+                    justify-content: center;
                     .app__single{
                         display: flex;
                         flex-direction: column;

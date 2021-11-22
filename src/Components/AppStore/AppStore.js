@@ -13,7 +13,7 @@ const AppStore = () => {
     const [active, setActive] = useState(false);
 
     const categories = [
-        { id: 1, name: "Web Apps/MERN", to: "full-stack", className: "nav_item", idName: "react" },
+        { id: 1, name: "React Web Apps", to: "full-stack", className: "nav_item", idName: "react" },
         { id: 2, name: "PSD to HTML", to: "psd-to-html", className: "nav_item", idName: "psd" },
         { id: 3, name: "API Integration", to: "api-integration", className: "nav_item", idName: "api" },
         { id: 4, name: "Email Templates", to: "email-templates", className: "nav_item", idName: "email" },

@@ -3,25 +3,27 @@ import {
     Link
 } from "react-router-dom";
 import { useParams } from 'react-router';
-import igot from '../../Image/igot.png';
-import github from '../../Image/github.svg';
-import portfolio from '../../Image/portfolio.svg';
-import fiverr from '../../Image/fiverr.svg';
-import behance from '../../Image/behance.svg';
+// import igot from '../../Image/igot.png';
+// import github from '../../Image/github.svg';
+// import portfolio from '../../Image/portfolio.svg';
+// import fiverr from '../../Image/fiverr.svg';
+// import behance from '../../Image/behance.svg';
 import loader from '../../Image/loader.gif';
+import DetailModal from '../DetailModal/DetailModal';
 
 const FullStack = () => {
     const { categoryPath } = useParams();
     
     const [isLoading, setIsLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [projects, setProjects] = useState([]);
-    const [details, setDetails] = useState([]);
-    const [techs, setTechs] = useState([]);
+    const [details, setDetails] = useState({});
+    // const [techs, setTechs] = useState([]);
 
     useEffect(() => {
         let url;
         if(categoryPath === undefined) {
-            url = `http://localhost:5000/projects/psd-to-html`;
+            url = `http://localhost:5000/projects/full-stack`;
         }else{
             url = `http://localhost:5000/projects/${categoryPath}`;
         }
@@ -31,7 +33,7 @@ const FullStack = () => {
             setProjects(data);
         })
         .catch((error) => {
-            console.log(error);
+            console.log('category fetch error!', error);
         })
         .finally(() => setIsLoading(false));
     }, [projects])
@@ -42,67 +44,63 @@ const FullStack = () => {
         const modalContainer = document.getElementById('modal-container');
         modalContainer.classList.add('show-modal');
         setDetails(project);
-        setTechs(project.techs);
-        loadViews(project._id);
+        setIsModalOpen(true);
+        // setTechs(project.techs);
+        // loadViews(project._id);
     }
 
-    const loadViews = (id) => {
-        let url = `http://localhost:5000/views/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(projects)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.modifiedCount > 0){
-                setProjects(projects);
-            }else{
-                console.log('HELLOW KITTY');
-            }
-        })
-    }
+    // const loadViews = (id) => {
+    //     let url = `http://localhost:5000/views/${id}`;
+    //     fetch(url, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(projects)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data.modifiedCount > 0){
+    //             setDetails(projects[0]);
+    //             setProjects(projects);
+    //         }else{
+    //             console.log('HELLOW KITTY');
+    //         }
+    //     })
+    // }
 
-    const handleClose = (e) => {
-        const modalContainer = document.getElementById('modal-container');
-        modalContainer.classList.remove('show-modal');
-        e.preventDefault();
-    }
-
-    const handleReact = (id) => {
-        let url = `http://localhost:5000/reaction/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(projects)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.modifiedCount > 0){
-                document.getElementById('icon-heart').style.color = 'red';
-                setDetails(projects[0]);
-                setProjects(projects);
-                console.log('hitted');
-            }else{
-                document.getElementById('icon-heart').style.color = 'green';
-                console.log('else hit');
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
+    // const handleReact = (id) => {
+    //     let url = `http://localhost:5000/reaction/${id}`;
+    //     fetch(url, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(projects)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data.modifiedCount > 0){
+    //             document.getElementById('icon-heart').style.color = 'red';
+    //             setDetails(projects[0]);
+    //             setProjects(projects);
+    //             console.log('hitted');
+    //         }else{
+    //             document.getElementById('icon-heart').style.color = 'green';
+    //             console.log('else hit');
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     })
+    // }
 
     return (
         <>
             <div className="app__inside">
                 {
                     !isLoading && projects.map((project) => (
-                                    <div className="app__single" key={project.id}>
+                                    <div className="app__single" key={project._id}>
                                         <button className="reg--24" onClick={() => handleModal(project)}>
                                             <img src={project.logo} alt="logo"/>
                                             <p className="lit--18">{project.title}</p>
@@ -117,8 +115,13 @@ const FullStack = () => {
                                     </div>
                 }
             </div>
-
             <div className="modal__container" id="modal-container">
+                {
+                    isModalOpen && <DetailModal details={details} key={details._id} setIsModalOpen={setIsModalOpen} setDetails={setDetails}/>
+                }
+            </div>
+
+            {/* <div className="modal__container" id="modal-container">
                 <div className="modal__content">
                     <div className="modal__close" title="Close" onClick={handleClose}>
                         <i className='fa fa-close'></i>
@@ -129,7 +132,7 @@ const FullStack = () => {
                             <img src={details.logo} alt={igot}/>
                             <div className="content__text">
                                 <p className="reg--36">{details.title}</p>
-                                <a href={details.link}><button>Live Preview</button></a>
+                                <a href={details.link} target="_blank" rel="noopener noreferrer"><button>Live Preview</button></a>
                             </div>
                         </div>
                         <div className="content__desc">
@@ -195,7 +198,7 @@ const FullStack = () => {
                         <p>Views</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
