@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import {
     Link
 } from "react-router-dom";
@@ -36,32 +37,79 @@ const DetailModal = (props) => {
                 console.log('Problem in view Count fetch!');
             }
         })
-    }, [reacts])
-
+    }, [])
 
     const handleReact = (id) => {
-        let url = `http://localhost:5000/reaction/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(props.details)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.modifiedCount > 0){
-                document.getElementById('icon-heart').style.color = 'red';
-                setReacts(props.details.loves+1);
-            }else{
-                document.getElementById('icon-heart').style.color = 'green';
-                console.log('Problem in react count fetch!');
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+        const loading = toast.loading('Please wait ...');
+        let liked = false;
+
+        const alreadyLiked = addToStorage(id, liked);
+
+        console.log('after adding to storage', alreadyLiked);
+
+        if(alreadyLiked){
+            toast.dismiss(loading);
+            toast.error("You've already liked it! 😃");
+        }else{
+            let url = `http://localhost:5000/reaction/${id}`;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(props.details)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.modifiedCount > 0){
+                    document.getElementById('icon-heart').style.color = 'red';
+                    toast.dismiss(loading);
+                    toast.success('Thanks for the appreciation!');
+                    setReacts(reacts+1);
+                }else{
+                    toast.dismiss(loading);
+                    toast.error("You've already liked it! 😃");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
     }
+
+    const addToStorage = (id, liked) => {
+        const exists = getStorage();
+        console.log(exists);
+        
+        let react_cart = {};
+        if (!exists) {
+          react_cart[id] = 1;
+          console.log('First Time,', id);
+          liked = false;
+        }
+        else {
+          react_cart = JSON.parse(exists);
+          if (react_cart[id]) {
+            const newCount = react_cart[id] + 1;
+            react_cart[id] = newCount;
+            console.log('already existed so ++');
+            liked = true;
+          }
+          else {
+            react_cart[id] = 1;
+            liked = false;
+            console.log('Storage exists but id doesnt');
+          }
+        }
+        updateStorage(react_cart);
+        return liked;
+    }
+    
+    const getStorage = () => localStorage.getItem('liked_id');
+
+    const updateStorage = cart => {
+        localStorage.setItem('liked_id', JSON.stringify(cart));
+    }    
 
     return (
         <>
@@ -127,7 +175,7 @@ const DetailModal = (props) => {
                     </a>
 
                     <div className="extra__icon">
-                        <button type="button" className="react" onClick={() => handleReact(_id)}>
+                        <button type="button" className="react" onClick={() => handleReact(_id)} id="react-btn">
                             <i className="fa fa-heart" id="icon-heart"></i>
                             <p>{reacts}</p>
                         </button>
@@ -142,6 +190,11 @@ const DetailModal = (props) => {
                         <p>Views</p>
                     </div>
                 </div>
+
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
         </>
     );
 };
