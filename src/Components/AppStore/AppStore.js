@@ -15,7 +15,7 @@ const AppStore = () => {
     const categories = [
         { id: 1, name: "React Web Apps", to: "full-stack", className: "nav_item", idName: "react" },
         { id: 2, name: "PSD to HTML", to: "psd-to-html", className: "nav_item", idName: "psd" },
-        { id: 3, name: "API Integration", to: "api-integration", className: "nav_item", idName: "api" },
+        { id: 3, name: "Fun With API", to: "fun-with-api", className: "nav_item", idName: "api" },
         { id: 4, name: "Email Templates", to: "email-templates", className: "nav_item", idName: "email" },
         { id: 5, name: "UI/UX Design", to: "ui-ux-design", className: "nav_item", idName: "ui" },
         { id: 6, name: "Codepens", to: "my-pens", className: "nav_item", idName: "pen" }

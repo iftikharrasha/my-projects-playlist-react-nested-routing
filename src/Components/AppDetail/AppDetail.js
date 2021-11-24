@@ -14,9 +14,9 @@ const FullStack = () => {
     useEffect(() => {
         let url;
         if(categoryPath === undefined) {
-            url = `http://localhost:5000/projects/full-stack`;
+            url = `https://still-peak-02811.herokuapp.com/projects/full-stack`;
         }else{
-            url = `http://localhost:5000/projects/${categoryPath}`;
+            url = `https://still-peak-02811.herokuapp.com/projects/${categoryPath}`;
         }
         fetch(url)
         .then(res => res.json())
@@ -27,8 +27,7 @@ const FullStack = () => {
             console.log('category fetch error!', error);
         })
         .finally(() => setIsLoading(false));
-    }, [projects, categoryPath])
-
+    }, [projects])
     
 
     const handleModal = (project) => {

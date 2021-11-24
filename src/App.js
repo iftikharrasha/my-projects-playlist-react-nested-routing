@@ -6,25 +6,28 @@ import {
 } from "react-router-dom";
 import './Sass/style.css';
 import PlayList from './Pages/Playlist.js';
+import AuthProvider from './contexts/AuthProvider/AuthProvider';
 
 function App() {
   return (
     <div className="App">
-        <Router>
-            <Switch>
-                <Route path="/playlist">
-                    <PlayList/>
-                </Route>
-                <Route path="/home">
-                    
-                </Route>
-                <Route exact path="/">
-                    
-                </Route>
-                <Route path="*">
-                </Route>
-            </Switch>
-        </Router>
+        <AuthProvider>
+          <Router>
+              <Switch>
+                  <Route path="/playlist">
+                      <PlayList/>
+                  </Route>
+                  <Route path="/home">
+                      
+                  </Route>
+                  <Route exact path="/">
+
+                  </Route>
+                  <Route path="*">
+                  </Route>
+              </Switch>
+          </Router>
+        </AuthProvider>
     </div>
   );
 }

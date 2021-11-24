@@ -533,6 +533,7 @@
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar h3 span {
   font-weight: 600;
+  text-transform: capitalize;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar button {

@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import {
-    Link
-} from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import githubLogo from '../../Image/github.svg';
 import portfolioLogo from '../../Image/portfolio.svg';
 import fiverrLogo from '../../Image/fiverr.svg';
 import behanceLogo from '../../Image/behance.svg';
 import { useEffect } from 'react';
+import useAuth from '../../Hooks/useAuth';
 
 const DetailModal = (props) => {
     const {_id, logo, title, link, desc, techs, ui, repo, behance, loves, views} = props.details;
     const [reacts, setReacts] = useState(loves);
+    const { loggedInUser, signInWithGoogle, logoutUser, authError } = useAuth();
+
+    const history = useHistory();
+    const location = useLocation();
 
     const handleClose = (e) => {
         const modalContainer = document.getElementById('modal-container');
@@ -21,7 +24,7 @@ const DetailModal = (props) => {
     }
 
     useEffect(() => {
-        let url = `http://localhost:5000/views/${_id}`;
+        let url = `https://still-peak-02811.herokuapp.com/views/${_id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -34,7 +37,7 @@ const DetailModal = (props) => {
             if(data.modifiedCount > 0){
                 props.setDetails(props.details);
             }else{
-                console.log('Problem in view Count fetch!');
+                console.log('OPPS!');
             }
         })
 
@@ -61,9 +64,11 @@ const DetailModal = (props) => {
 
         if(alreadyLiked){
             toast.dismiss(loading);
-            toast.error("You've already liked it! 😃");
+            toast("You've already liked it!", {
+                icon: '👏',
+            });
         }else{
-            let url = `http://localhost:5000/reaction/${id}`;
+            let url = `https://still-peak-02811.herokuapp.com/reaction/${id}`;
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -76,17 +81,23 @@ const DetailModal = (props) => {
                 if(data.modifiedCount > 0){
                     document.getElementById('icon-heart').style.color = 'red';
                     toast.dismiss(loading);
-                    toast.success('Thanks for the appreciation!');
+                    toast.success('Thanks for the appreciation! 😃');
                     setReacts(reacts+1);
                 }else{
                     toast.dismiss(loading);
-                    toast.error("You've already liked it! 😃");
+                    toast("You've already liked it!", {
+                        icon: '👏',
+                    });
                 }
             })
             .catch((error) => {
                 console.log(error);
             })
         }
+    }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history);
     }
 
     const addToStorage = (id, liked) => {
@@ -157,7 +168,7 @@ const DetailModal = (props) => {
                             </a>
 
                             {
-                                behance && <a href={behance} target="_blank" rel="noopener noreferrer">
+                                behance &&  <a href={behance} target="_blank" rel="noopener noreferrer">
                                                 <div className="extra__icon">
                                                     <img src={behanceLogo} alt={behanceLogo}/>
                                                     <p>Behance</p>
@@ -266,38 +277,39 @@ const DetailModal = (props) => {
                                 </div>
                             </div>
 
-                            <div className="comment__box">
-                                <form>
-                                    <div className="comment__bar">
-                                        <h3 className="reg--24">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                            Commenting as <span>Iftikhar Rasha</span>,
-                                        </h3>
-                                        <button><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</button>
-                                    </div>
-                                    <textarea  rows="3" cols="40" className="reg--24" required placeholder="Write your review here . . ."></textarea>
-                                    <button className="reg--24">Submit</button>
-                                </form>
-                            </div>
+                            {
+                                loggedInUser.isSignedIn ?   <div className="comment__box">
+                                                                <form>
+                                                                    <div className="comment__bar">
+                                                                        <h3 className="reg--24">
+                                                                            <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                            Commenting as <span>{loggedInUser.name},</span>
+                                                                        </h3>
+                                                                        <button onClick={logoutUser}><i className="fa fa-sign-out" aria-hidden="true"></i> Sign Out</button>
+                                                                    </div>
+                                                                    <textarea  rows="3" cols="40" className="reg--24" required placeholder="Write your review here . . ."></textarea>
+                                                                    <button className="reg--24">Submit</button>
+                                                                </form>
+                                                            </div>
 
-                            <div className="account__creation">
-                                <h3 className="text--center reg--24">Sign in with google to drop your review! 😃</h3>
-
-                                <div className="social__login">
-                                    <button>
-                                        <img src="https://rh-london.web.app/static/media/google.154ddb64.svg" alt="google"/>
-                                        <span className="reg--24">Continue with Google</span>
-                                    </button>
-                                </div>
-                            </div>
+                                                        :   <div className="account__creation">
+                                                                <h3 className="text--center reg--24">Sign in with google to drop your review! 😃</h3>
+            
+                                                                <div className="social__login">
+                                                                    <button onClick={handleGoogleSignIn}>
+                                                                        <img src="https://rh-london.web.app/static/media/google.154ddb64.svg" alt="google"/>
+                                                                        <span className="reg--24">Continue with Google</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                            }
+                            <Toaster
+                                position="top-center"
+                                reverseOrder={false}
+                            />
                         </div>
                     </div>
                 </div>
-
-                <Toaster
-                    position="top-center"
-                    reverseOrder={false}
-                />
         </>
     );
 };
