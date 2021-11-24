@@ -37,6 +37,20 @@ const DetailModal = (props) => {
                 console.log('Problem in view Count fetch!');
             }
         })
+
+        //checking liked for color
+        const exists = getStorage();
+        
+        let color_cart = {};
+        if (exists) {
+            color_cart = JSON.parse(exists);
+            if (color_cart[_id]) {
+                document.getElementById('icon-heart').style.color = 'red';
+            }
+            else {
+                document.getElementById('icon-heart').style.color = '$primary';
+            }
+        }
     }, [])
 
     const handleReact = (id) => {
@@ -44,8 +58,6 @@ const DetailModal = (props) => {
         let liked = false;
 
         const alreadyLiked = addToStorage(id, liked);
-
-        console.log('after adding to storage', alreadyLiked);
 
         if(alreadyLiked){
             toast.dismiss(loading);
@@ -79,12 +91,10 @@ const DetailModal = (props) => {
 
     const addToStorage = (id, liked) => {
         const exists = getStorage();
-        console.log(exists);
         
         let react_cart = {};
         if (!exists) {
           react_cart[id] = 1;
-          console.log('First Time,', id);
           liked = false;
         }
         else {
@@ -92,13 +102,11 @@ const DetailModal = (props) => {
           if (react_cart[id]) {
             const newCount = react_cart[id] + 1;
             react_cart[id] = newCount;
-            console.log('already existed so ++');
             liked = true;
           }
           else {
             react_cart[id] = 1;
             liked = false;
-            console.log('Storage exists but id doesnt');
           }
         }
         updateStorage(react_cart);
@@ -132,62 +140,104 @@ const DetailModal = (props) => {
                             <p className="reg--24">{desc}</p>
                             <h4 className="reg--36">Tech Stack</h4>
                             <ul>
-                            {
+                                {
                                     techs.map(tech => (
                                         <li className="reg--24" key={tech.No}>{tech.tool}</li>
                                     ))
                                 }
                             </ul>
                         </div>
+
+                        <div className="content__extra">
+                            <a href={repo} target="_blank" rel="noopener noreferrer">
+                                <div className="extra__icon">
+                                    <img src={githubLogo} alt={githubLogo}/>
+                                    <p>Git Repo</p>
+                                </div>
+                            </a>
+
+                            {
+                                behance && <a href={behance} target="_blank" rel="noopener noreferrer">
+                                                <div className="extra__icon">
+                                                    <img src={behanceLogo} alt={behanceLogo}/>
+                                                    <p>Behance</p>
+                                                </div>
+                                            </a>
+                            }
+                            
+
+                            <a href="http://iftikharrasha.com/" target="_blank" rel="noopener noreferrer">
+                                <div className="extra__icon">
+                                    <img src={portfolioLogo} alt={portfolioLogo}/>
+                                    <p>Porfolio</p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.fiverr.com/iftikharrasha/" target="_blank" rel="noopener noreferrer">
+                                <div className="extra__icon">
+                                    <img src={fiverrLogo} alt={fiverrLogo}/>
+                                    <p>Fiverr</p>
+                                </div>
+                            </a>
+
+                            <div className="extra__icon">
+                                <button type="button" className="react" onClick={() => handleReact(_id)} id="react-btn">
+                                    <i className="fa fa-heart" id="icon-heart"></i>
+                                    <p>{reacts}</p>
+                                </button>
+                                <p>Likes</p>
+                            </div>
+
+                            <div className="extra__icon">
+                                <button type="button" className="react">
+                                    <i className="fa fa-eye" id="icon-heart"></i>
+                                    <p>{views}</p>
+                                </button>
+                                <p>Views</p>
+                            </div>
+
+                            <a href="#reviews">
+                                <div className="extra__icon">
+                                    <button type="button" className="react">
+                                        <i className="fa fa-star star" id="icon-heart"></i>
+                                        <p>{views}</p>
+                                    </button>
+                                    <p>Reviews</p>
+                                </div>
+                            </a>
+                        </div>
                         <div className="content__ui">
                             <img src={ui} alt="ui" className="img-fluid"/>
                         </div>
-                    </div>
-                </div>
 
-                <div className="content__extra">
-                    <Link to={repo} target="_blank" rel="noopener noreferrer">
-                        <div className="extra__icon">
-                            <img src={githubLogo} alt={githubLogo}/>
-                            <p>Git Repo</p>
+                        <div className="content__review" id="reviews">
+                            <h4 className="reg--36">Reviews</h4>
+                            <div class="comment--card">
+                                <div class="comment--item my-5">
+                                    <div class="comment--img">
+                                        <img src={portfolioLogo} alt={portfolioLogo}/>
+                                    </div>
+                                    <div class="comment--desc">
+                                        <span class="bigReg--18">James Washington</span>
+                                        <span class="verified">Verified</span>
+                                        <div class="comment--rating">
+                                            <span class="reg--18 mr-2">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </span>
+                                            <span class="reg--18">2 Hours Ago</span>
+                                        </div>
+                                        <p class="reg--14 mt-4 mb-sm-5 mb-2">
+                                            This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr/>
+                            </div>
                         </div>
-                    </Link>
-
-                    <Link to={behance} target="_blank" rel="noopener noreferrer">
-                        <div className="extra__icon">
-                            <img src={behanceLogo} alt={behanceLogo}/>
-                            <p>Behance</p>
-                        </div>
-                    </Link>
-
-                    <a href="http://iftikharrasha.com/" target="_blank" rel="noopener noreferrer">
-                        <div className="extra__icon">
-                            <img src={portfolioLogo} alt={portfolioLogo}/>
-                            <p>Porfolio</p>
-                        </div>
-                    </a>
-
-                    <a href="https://www.fiverr.com/iftikharrasha/" target="_blank" rel="noopener noreferrer">
-                        <div className="extra__icon">
-                            <img src={fiverrLogo} alt={fiverrLogo}/>
-                            <p>Fiverr</p>
-                        </div>
-                    </a>
-
-                    <div className="extra__icon">
-                        <button type="button" className="react" onClick={() => handleReact(_id)} id="react-btn">
-                            <i className="fa fa-heart" id="icon-heart"></i>
-                            <p>{reacts}</p>
-                        </button>
-                        <p>Likes</p>
-                    </div>
-
-                    <div className="extra__icon">
-                        <button type="button" className="react">
-                            <i className="fa fa-eye" id="icon-heart"></i>
-                            <p>{views}</p>
-                        </button>
-                        <p>Views</p>
                     </div>
                 </div>
 

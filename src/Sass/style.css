@@ -356,27 +356,22 @@
   text-transform: uppercase;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__ui img {
-  width: 100%;
-  border-radius: 0.3rem;
-}
-
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra {
   display: none;
   position: absolute;
   top: 2rem;
   right: 0;
-  -webkit-transform: translateX(1.25rem);
-          transform: translateX(1.25rem);
+  -webkit-transform: translateX(6rem);
+          transform: translateX(6rem);
   -webkit-transition: all .3s;
   transition: all .3s;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra a {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra a {
   color: var(--accent);
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra .extra__icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -393,13 +388,13 @@
   margin-bottom: 1.5rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon img {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra .extra__icon img {
   width: 3.2rem;
   border-radius: 50%;
   margin-bottom: 0.5rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon button {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra .extra__icon button {
   background-color: white;
   cursor: pointer;
   font-size: 1.2rem;
@@ -410,8 +405,71 @@
   margin-bottom: 0.5rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .content__extra .extra__icon button p {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra .extra__icon button .star {
+  color: var(--secondary);
+  -webkit-text-stroke: 1px var(--primary);
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__extra .extra__icon button p {
   font-size: 0.8rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__ui img {
+  width: 100%;
+  border-radius: 0.3rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review {
+  margin: 3rem 0 1.5rem 0;
+  text-align: left;
+  color: var(--primary);
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review h4 {
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card {
+  background-color: var(--accent);
+  color: var(--primary);
+  width: 100%;
+  padding: 2.5rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item {
+  width: 85%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--img {
+  width: 15%;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--img img {
+  width: 5.5rem;
+  border-radius: 50%;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--desc {
+  width: 90%;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--desc .verified {
+  color: #04c804;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-style: italic;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .show-modal {
@@ -426,12 +484,25 @@
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .show-modal .content__extra {
-  display: block;
+  display: block !important;
 }
 
 @media (max-width: 991.98px) {
   .playlist .playlist__content .playlist__container .playlist__details .show-modal .content__extra {
-    display: none;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: space-evenly !important;
+        -ms-flex-pack: space-evenly !important;
+            justify-content: space-evenly !important;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-transform: translateX(0) !important;
+            transform: translateX(0) !important;
+    position: static !important;
+  }
+  .playlist .playlist__content .playlist__container .playlist__details .show-modal .content__extra .extra__icon p {
+    color: var(--primary) !important;
   }
 }
 

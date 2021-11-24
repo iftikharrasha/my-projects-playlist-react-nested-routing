@@ -198,44 +198,86 @@
                                     }
                                 }
                             }
+                            .content__extra{
+                                display: none;
+                                position: absolute;
+                                top: 2rem;
+                                right: 0;
+                                transform: translateX(6rem);
+                                transition: all .3s;
+                                a{
+                                    color: $accent;
+                                }
+                                .extra__icon{
+                                    @include flexCenter;
+                                    flex-direction: column;
+                                    margin-bottom: 1.5rem;
+                                    img{
+                                        width: 3.2rem;
+                                        border-radius: 50%;
+                                        margin-bottom: 0.5rem;
+                                    }
+                                    button{
+                                        background-color: white;
+                                        cursor: pointer;
+                                        font-size: 1.2rem;
+                                        width: 3.2rem;
+                                        height: 3.2rem;
+                                        border:  0;
+                                        border-radius: 50%;
+                                        margin-bottom: 0.5rem;
+                                        .star{
+                                            color: $secondary;
+                                            -webkit-text-stroke: 1px $primary;
+                                        }
+                                        p{
+                                            font-size: 0.8rem;
+                                        }
+                                    }
+                                }
+                            }
                             .content__ui{
                                 img{
                                     width: 100%;
                                     border-radius: 0.3rem;
                                 }
                             }
-                        }
-                    }
-                    .content__extra{
-                        display: none;
-                        position: absolute;
-                        top: 2rem;
-                        right: 0;
-                        transform: translateX(1.25rem);
-                        transition: all .3s;
-                        a{
-                            color: $accent;
-                        }
-                        .extra__icon{
-                            @include flexCenter;
-                            flex-direction: column;
-                            margin-bottom: 1.5rem;
-                            img{
-                                width: 3.2rem;
-                                border-radius: 50%;
-                                margin-bottom: 0.5rem;
-                            }
-                            button{
-                                background-color: white;
-                                cursor: pointer;
-                                font-size: 1.2rem;
-                                width: 3.2rem;
-                                height: 3.2rem;
-                                border:  0;
-                                border-radius: 50%;
-                                margin-bottom: 0.5rem;
-                                p{
-                                    font-size: 0.8rem;
+                            .content__review{
+                                margin: 3rem 0 1.5rem 0;
+                                text-align: left;
+                                color: $primary;
+                                h4{
+                                    margin-bottom: 1rem;
+                                    text-decoration: underline;
+                                }
+                                .comment--card {
+                                    background-color: $accent;
+                                    color: $primary;
+                                    width: 100%;
+                                    padding: 2.5rem 2rem;
+                                    border-radius: 0.5rem;
+                                    .comment--item {
+                                        width: 85%;
+                                        margin: 0 auto;
+                                        @include flexCenter;
+                                        .comment--img {
+                                            width: 15%;
+                                            img {
+                                                width: 5.5rem;
+                                                border-radius: 50%;
+                                            }
+                                        }
+                                        .comment--desc {
+                                            width: 90%;
+                                            .verified {
+                                                color: rgb(4, 200, 4);
+                                                font-size: 0.875rem;
+                                                font-weight: 700;
+                                                font-style: italic;
+                                            }
+
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -249,9 +291,18 @@
                         transform: translateY(0);
                     }
                     .content__extra{
-                        display: block;
+                        display: block !important;
                         @media (max-width: 991.98px) {
-                            display: none;
+                            display: flex !important;
+                            justify-content: space-evenly !important;
+                            flex-wrap: wrap;
+                            transform: translateX(0) !important;
+                            position: static !important;
+                            .extra__icon{
+                                p{
+                                    color: $primary !important;
+                                }
+                            }
                         }
                     }
                 }
