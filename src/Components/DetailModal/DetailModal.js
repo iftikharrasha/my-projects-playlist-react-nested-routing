@@ -55,7 +55,7 @@ const DetailModal = (props) => {
 
     
     useEffect(() => {
-        let url = `http://localhost:5000/reviews/${_id}`;
+        let url = `https://still-peak-02811.herokuapp.com/reviews/${_id}`;
         fetch(url)
         .then(res => res.json())
         .then(data => setReviews(data));
@@ -170,7 +170,7 @@ const DetailModal = (props) => {
         const status = 'verified';
 
         const newReview = { projectId, author, img, comment, rating, status, dateId };
-        fetch('http://localhost:5000/add-review', {
+        fetch('https://still-peak-02811.herokuapp.com/add-review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
