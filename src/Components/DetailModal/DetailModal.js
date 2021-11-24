@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 import githubLogo from '../../Image/github.svg';
 import portfolioLogo from '../../Image/portfolio.svg';
 import fiverrLogo from '../../Image/fiverr.svg';
@@ -11,17 +12,11 @@ import useAuth from '../../Hooks/useAuth';
 const DetailModal = (props) => {
     const {_id, logo, title, link, desc, techs, ui, repo, behance, loves, views} = props.details;
     const [reacts, setReacts] = useState(loves);
+    const [rating, setRating] = useState(0);
     const { loggedInUser, signInWithGoogle, logoutUser, authError } = useAuth();
 
     const history = useHistory();
     const location = useLocation();
-
-    const handleClose = (e) => {
-        const modalContainer = document.getElementById('modal-container');
-        modalContainer.classList.remove('show-modal');
-        props.setIsModalOpen(false);
-        e.preventDefault();
-    }
 
     useEffect(() => {
         let url = `https://still-peak-02811.herokuapp.com/views/${_id}`;
@@ -37,7 +32,7 @@ const DetailModal = (props) => {
             if(data.modifiedCount > 0){
                 props.setDetails(props.details);
             }else{
-                console.log('OPPS!');
+                console.log('API Stoinks! 😃');
             }
         })
 
@@ -56,6 +51,12 @@ const DetailModal = (props) => {
         }
     }, [])
 
+    //google login
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history);
+    }
+
+    //love react
     const handleReact = (id) => {
         const loading = toast.loading('Please wait ...');
         let liked = false;
@@ -96,10 +97,7 @@ const DetailModal = (props) => {
         }
     }
 
-    const handleGoogleSignIn = () => {
-        signInWithGoogle(location, history);
-    }
-
+    //local storage utilities
     const addToStorage = (id, liked) => {
         const exists = getStorage();
         
@@ -128,6 +126,67 @@ const DetailModal = (props) => {
 
     const updateStorage = cart => {
         localStorage.setItem('liked_id', JSON.stringify(cart));
+    }
+
+    //review system
+    const ratingCount = {
+        size: 0,
+        count: 5,
+        color: "black",
+        activeColor: "red",
+        value: 0,
+        a11y: true,
+        isHalf: true,
+        emptyIcon: <i className="far fa-star" />,
+        halfIcon: <i className="fa fa-star-half-alt" />,
+        filledIcon: <i className="fa fa-star" />,
+        onChange: newValue => {
+            setRating(newValue);
+        }
+    };
+
+    const author = loggedInUser.name;
+    const img = loggedInUser.photo;
+    const commentRef = useRef();
+
+    const handleReview = (e) => {
+        const loading = toast.loading('Please wait ...');
+        toast.dismiss(loading);
+        const comment = commentRef.current.value;
+        const projectId = _id;
+        // const userId = loggedInUser.id;
+        const status = 'verified';
+
+        const newReview = { projectId, author, img, comment, rating, status };
+        fetch('http://localhost:5000/add-review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newReview)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            if(data.insertedId){
+                toast.dismiss(loading);
+                toast.success("Successfully added your review!", {
+                    position: "bottom-center"
+                });
+                e.target.reset();
+            }else{
+                toast.dismiss(loading);
+                toast.error('Something went wrong!');
+            }
+        })
+
+        e.preventDefault();
+    }
+
+    const handleClose = (e) => {
+        const modalContainer = document.getElementById('modal-container');
+        modalContainer.classList.remove('show-modal');
+        props.setIsModalOpen(false);
+        e.preventDefault();
     }    
 
     return (
@@ -279,7 +338,7 @@ const DetailModal = (props) => {
 
                             {
                                 loggedInUser.isSignedIn ?   <div className="comment__box">
-                                                                <form>
+                                                                <form onSubmit={handleReview}>
                                                                     <div className="comment__bar">
                                                                         <h3 className="reg--24">
                                                                             <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -287,7 +346,11 @@ const DetailModal = (props) => {
                                                                         </h3>
                                                                         <button onClick={logoutUser}><i className="fa fa-sign-out" aria-hidden="true"></i> Sign Out</button>
                                                                     </div>
-                                                                    <textarea  rows="3" cols="40" className="reg--24" required placeholder="Write your review here . . ."></textarea>
+                                                                    <textarea ref={commentRef} rows="3" cols="40" className="reg--24" required placeholder="Write your review here . . ."></textarea>
+                                                                    <span className="story-rating">
+                                                                        <h3 className="reg--24">Leave your Rating:</h3>
+                                                                        <ReactStars {...ratingCount} />
+                                                                    </span>
                                                                     <button className="reg--24">Submit</button>
                                                                 </form>
                                                             </div>
