@@ -268,16 +268,18 @@
                                             width: 100%;
                                             .desc__top{
                                                 display: flex;
+                                                align-items: center;
                                                 margin-bottom: 1rem;
                                                 .comment__img {
                                                     margin-right: 1rem;
                                                     img {
-                                                        width: 5rem;
+                                                        width: 4rem;
                                                         border-radius: 50%;
                                                     }
                                                 }
                                                 .user{
                                                     font-weight: 500;
+                                                    text-transform: capitalize;;
                                                 }
                                                 .verified {
                                                     color: green;
@@ -286,14 +288,17 @@
                                                     font-style: italic;
                                                     margin-left: 0.5rem;
                                                 }
-                                                .comment__rating{
+                                                .story-rating{
+                                                    display: flex;
                                                     margin-bottom: 1rem;
                                                     span{
-                                                        margin-right: 0.5rem;
                                                         i{
                                                             color: $secondary;
                                                             font-size: 1.25rem;
                                                         }
+                                                    }
+                                                    .time{
+                                                        margin-left: 1rem;
                                                     }
                                                 }
                                             }

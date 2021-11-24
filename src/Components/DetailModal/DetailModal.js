@@ -8,11 +8,13 @@ import fiverrLogo from '../../Image/fiverr.svg';
 import behanceLogo from '../../Image/behance.svg';
 import { useEffect } from 'react';
 import useAuth from '../../Hooks/useAuth';
+import moment from 'moment';
 
 const DetailModal = (props) => {
-    const {_id, logo, title, link, desc, techs, ui, repo, behance, loves, views} = props.details;
+    const { _id, logo, title, link, desc, techs, ui, repo, behance, loves, views, featured } = props.details;
     const [reacts, setReacts] = useState(loves);
     const [rating, setRating] = useState(0);
+    const [reviews, setReviews] = useState([]);
     const { loggedInUser, signInWithGoogle, logoutUser, authError } = useAuth();
 
     const history = useHistory();
@@ -49,6 +51,14 @@ const DetailModal = (props) => {
                 document.getElementById('icon-heart').style.color = '$primary';
             }
         }
+    }, [])
+
+    
+    useEffect(() => {
+        let url = `http://localhost:5000/reviews/${_id}`;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setReviews(data));
     }, [])
 
     //google login
@@ -145,6 +155,8 @@ const DetailModal = (props) => {
         }
     };
 
+    const date = new Date().toISOString().slice(0, 10);
+    const dateId = date.replace(/-/g, "");
     const author = loggedInUser.name;
     const img = loggedInUser.photo;
     const commentRef = useRef();
@@ -157,7 +169,7 @@ const DetailModal = (props) => {
         // const userId = loggedInUser.id;
         const status = 'verified';
 
-        const newReview = { projectId, author, img, comment, rating, status };
+        const newReview = { projectId, author, img, comment, rating, status, dateId };
         fetch('http://localhost:5000/add-review', {
             method: 'POST',
             headers: {
@@ -270,7 +282,11 @@ const DetailModal = (props) => {
                                 <div className="extra__icon">
                                     <button type="button" className="react">
                                         <i className="fa fa-star star" id="icon-heart"></i>
-                                        <p>0</p>
+                                        {
+                                            featured ? <p>{reviews.length + 1}</p>
+                                            : <p>{reviews.length}</p>
+                                        }
+                                        
                                     </button>
                                     <p>Reviews</p>
                                 </div>
@@ -282,59 +298,59 @@ const DetailModal = (props) => {
 
                         <div className="content__review" id="reviews">
                             <h4 className="reg--36">Reviews</h4>
-                            <div className="comment__card">
-                                <div className="comment__item">
-                                    <div className="comment__desc">
-                                        <div className="desc__top">
-                                            <div className="comment__img">
-                                                <img src="https://lh3.googleusercontent.com/a-/AOh14GiJciuAieUfN7fxxRp83rvylW9aB8EGH2eMRLhr8Mk=s96-c" alt={portfolioLogo}/>
-                                            </div>
-                                            <div>
-                                                <span className="reg--24 user">James Washington</span>
-                                                <span className="verified">featured</span>
-                                                <div className="comment__rating">
-                                                    <span>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                    </span>
-                                                    <span className="reg--18">2 Hours Ago</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div className="comment__card">
+                            {/* {
+                                (featured && reviews) ? ''
+                                : <p>There is no review in this project yet!</p>
+                            } */}
+
+                            {
+                                featured &&  <div className="comment__card">
+                                                    <div className="comment__item">
+                                                        <div className="comment__desc">
+                                                            <div className="desc__top">
+                                                                <div className="comment__img">
+                                                                    <img src={featured[0].img} alt={featured[0].author}/>
+                                                                </div>
+                                                                <div>
+                                                                    <span className="reg--24 user">{featured[0].author}</span>
+                                                                    <span className="verified">{featured[0].status}</span>
+                                                                    <div className="story-rating">
+                                                                        <ReactStars {...ratingCount} value={featured[0].rating} edit={false}/>
+                                                                        <span className="reg--18 time">{moment(featured[0].dateId, "YYYYMMDD").fromNow()}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p>{featured[0].comment}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            }
+                            
+
+
+                            {reviews.map((review) => (
+                            <div className="comment__card" key={review._id}>
                                 <div className="comment__item">
                                     <div className="comment__desc">
                                         <div className="desc__top">
                                             <div className="comment__img">
-                                                <img src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/profile/photos/3567046/original/8069622291_0985caccajh7_k.jpg" alt={portfolioLogo}/>
+                                                <img src={review.img} alt={review.name}/>
                                             </div>
                                             <div>
-                                                <span className="reg--24 user">James Washington</span>
-                                                <span className="verified">Verified</span>
-                                                <div className="comment__rating">
-                                                    <span>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star"></i>
-                                                        <i className="fas fa-star-half-alt"></i>
-                                                    </span>
-                                                    <span className="reg--18">2 Hours Ago</span>
+                                                <span className="reg--24 user">{review.author}</span>
+                                                <span className="verified">{review.status}</span>
+                                                <div className="story-rating">
+                                                    <ReactStars {...ratingCount} value={review.rating} edit={false}/>
+                                                    <span className="reg--18 time">{moment(review.dateId, "YYYYMMDD").fromNow()}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p>This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..</p>
+                                        <p>{review.comment}</p>
                                     </div>
                                 </div>
                             </div>
+                            ))}
 
                             {
                                 loggedInUser.isSignedIn ?   <div className="comment__box">

@@ -467,6 +467,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 1rem;
 }
 
@@ -475,12 +478,13 @@
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__img img {
-  width: 5rem;
+  width: 4rem;
   border-radius: 50%;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .user {
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .verified {
@@ -491,17 +495,20 @@
   margin-left: 0.5rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__rating {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .story-rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin-bottom: 1rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__rating span {
-  margin-right: 0.5rem;
-}
-
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__rating span i {
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .story-rating span i {
   color: var(--secondary);
   font-size: 1.25rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .story-rating .time {
+  margin-left: 1rem;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc p {
