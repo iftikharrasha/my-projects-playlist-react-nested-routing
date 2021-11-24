@@ -243,39 +243,145 @@
                                 }
                             }
                             .content__review{
-                                margin: 3rem 0 1.5rem 0;
+                                padding: 5rem 0 1.5rem 0;
                                 text-align: left;
                                 color: $primary;
                                 h4{
                                     margin-bottom: 1rem;
                                     text-decoration: underline;
                                 }
-                                .comment--card {
-                                    background-color: $accent;
+                                .comment__card {
+                                    background-color: white;
                                     color: $primary;
                                     width: 100%;
-                                    padding: 2.5rem 2rem;
+                                    padding:2rem;
+                                    margin-top: 2rem;
+                                    margin-bottom: 2rem;
                                     border-radius: 0.5rem;
-                                    .comment--item {
-                                        width: 85%;
-                                        margin: 0 auto;
+                                    .comment__item {
                                         @include flexCenter;
-                                        .comment--img {
-                                            width: 15%;
-                                            img {
-                                                width: 5.5rem;
-                                                border-radius: 50%;
+                                        width: 100%;
+                                        @media (max-width: 991.98px)  {
+                                            width: 100%;
+                                        }
+                                        .comment__desc {
+                                            width: 100%;
+                                            .desc__top{
+                                                display: flex;
+                                                margin-bottom: 1rem;
+                                                .comment__img {
+                                                    margin-right: 1rem;
+                                                    img {
+                                                        width: 5rem;
+                                                        border-radius: 50%;
+                                                    }
+                                                }
+                                                .user{
+                                                    font-weight: 500;
+                                                }
+                                                .verified {
+                                                    color: green;
+                                                    font-size: 0.875rem;
+                                                    font-weight: 700;
+                                                    font-style: italic;
+                                                    margin-left: 0.5rem;
+                                                }
+                                                .comment__rating{
+                                                    margin-bottom: 1rem;
+                                                    span{
+                                                        margin-right: 0.5rem;
+                                                        i{
+                                                            color: $secondary;
+                                                            font-size: 1.25rem;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            p{
+                                                line-height: 1.25rem;
                                             }
                                         }
-                                        .comment--desc {
-                                            width: 90%;
-                                            .verified {
-                                                color: rgb(4, 200, 4);
-                                                font-size: 0.875rem;
-                                                font-weight: 700;
-                                                font-style: italic;
-                                            }
+                                    }
+                                }
 
+                                .comment__box{
+                                    form{
+                                        padding: 2rem 0;
+                                        .comment__bar{
+                                            @include flexCenter;
+                                            justify-content: space-between;
+                                            h3{
+                                                i{
+                                                    margin-right: 0.5rem;
+                                                }
+                                                span{
+                                                    font-weight: 600;
+                                                }
+                                            }
+                                            button{
+                                                background-color: $secondary;
+                                                color: $primary;
+                                                width: 10rem;
+                                                border-radius: 0.5rem;
+                                                border: none;
+                                                transition: .3s;
+                                                cursor: pointer;
+                                                @media (max-width: 576px) {
+                                                     font-size: 1rem;
+                                                }
+                                            }
+                                        }
+                                        textarea{
+                                            width: 100%;
+                                            background: white;
+                                            user-select: none;
+                                            border: none;
+                                            color: $primary;
+                                            margin: 1rem 0;
+                                            padding: 1.25rem 2rem;
+                                            border: 1px solid rgba(0,0,0,.1);
+                                            border-radius: 0.5rem;
+                                            font-size: 1.25rem;
+                                            line-height: 2rem;
+                                            &:focus {
+                                                border: 1px $secondary solid;
+                                            }
+                                        }
+                                        button{
+                                            width: 20%;
+                                            padding: 1rem 1.25rem;
+                                            border-radius: 0.5rem;
+                                            border: none;
+                                            transition: .3s;
+                                            cursor: pointer;
+                                            background-color: $primary;
+                                            color: $accent;
+                                        }
+                                    }
+                                }
+                                .account__creation{
+                                    padding: 2rem 0;
+                                    h3{
+                                        margin-bottom: 1rem;
+                                    }
+                                    .social__login{
+                                        @include flexCenter;
+                                        button{
+                                            @include flexCenter;
+                                            width: 25rem;
+                                            background: $primary;
+                                            border: 1px solid $primary;
+                                            color: $accent;
+                                            box-sizing: border-box;
+                                            border-radius: 3.562rem;
+                                            padding: 0.625rem 1.875rem;
+                                            cursor: pointer;
+                                            img{
+                                                width: 2rem;
+                                            }
+                                            span{
+                                                margin-left: 0.5rem;
+                                            }
                                         }
                                     }
                                 }

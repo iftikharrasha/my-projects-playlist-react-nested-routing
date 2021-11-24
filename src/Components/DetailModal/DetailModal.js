@@ -200,7 +200,7 @@ const DetailModal = (props) => {
                                 <div className="extra__icon">
                                     <button type="button" className="react">
                                         <i className="fa fa-star star" id="icon-heart"></i>
-                                        <p>{views}</p>
+                                        <p>0</p>
                                     </button>
                                     <p>Reviews</p>
                                 </div>
@@ -212,30 +212,83 @@ const DetailModal = (props) => {
 
                         <div className="content__review" id="reviews">
                             <h4 className="reg--36">Reviews</h4>
-                            <div class="comment--card">
-                                <div class="comment--item my-5">
-                                    <div class="comment--img">
-                                        <img src={portfolioLogo} alt={portfolioLogo}/>
-                                    </div>
-                                    <div class="comment--desc">
-                                        <span class="bigReg--18">James Washington</span>
-                                        <span class="verified">Verified</span>
-                                        <div class="comment--rating">
-                                            <span class="reg--18 mr-2">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                            </span>
-                                            <span class="reg--18">2 Hours Ago</span>
+                            <div className="comment__card">
+                                <div className="comment__item">
+                                    <div className="comment__desc">
+                                        <div className="desc__top">
+                                            <div className="comment__img">
+                                                <img src="https://lh3.googleusercontent.com/a-/AOh14GiJciuAieUfN7fxxRp83rvylW9aB8EGH2eMRLhr8Mk=s96-c" alt={portfolioLogo}/>
+                                            </div>
+                                            <div>
+                                                <span className="reg--24 user">James Washington</span>
+                                                <span className="verified">featured</span>
+                                                <div className="comment__rating">
+                                                    <span>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                    </span>
+                                                    <span className="reg--18">2 Hours Ago</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <p class="reg--14 mt-4 mb-sm-5 mb-2">
-                                            This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..
-                                        </p>
+                                        <p>This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..</p>
                                     </div>
                                 </div>
-                                <hr/>
+                            </div>
+
+                            <div className="comment__card">
+                                <div className="comment__item">
+                                    <div className="comment__desc">
+                                        <div className="desc__top">
+                                            <div className="comment__img">
+                                                <img src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_profile_small/v1/profile/photos/3567046/original/8069622291_0985caccajh7_k.jpg" alt={portfolioLogo}/>
+                                            </div>
+                                            <div>
+                                                <span className="reg--24 user">James Washington</span>
+                                                <span className="verified">Verified</span>
+                                                <div className="comment__rating">
+                                                    <span>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star-half-alt"></i>
+                                                    </span>
+                                                    <span className="reg--18">2 Hours Ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..This was great, I wasn't sure what to pick so I figured I couldn't go wrong with a watch for my girlfriend. I got it in the mail and gave it to her as a surprise gift - totally blew her away. Then i told her how I got it and she started looking for the survey everywhere until she found it - she got herself a body building supplement she's been wanting and she just had to pay for shipping. Really amazing..</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="comment__box">
+                                <form>
+                                    <div className="comment__bar">
+                                        <h3 className="reg--24">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            Commenting as <span>Iftikhar Rasha</span>,
+                                        </h3>
+                                        <button><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</button>
+                                    </div>
+                                    <textarea  rows="3" cols="40" className="reg--24" required placeholder="Write your review here . . ."></textarea>
+                                    <button className="reg--24">Submit</button>
+                                </form>
+                            </div>
+
+                            <div className="account__creation">
+                                <h3 className="text--center reg--24">Sign in with google to drop your review! 😃</h3>
+
+                                <div className="social__login">
+                                    <button>
+                                        <img src="https://rh-london.web.app/static/media/google.154ddb64.svg" alt="google"/>
+                                        <span className="reg--24">Continue with Google</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

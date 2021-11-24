@@ -420,7 +420,7 @@
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review {
-  margin: 3rem 0 1.5rem 0;
+  padding: 5rem 0 1.5rem 0;
   text-align: left;
   color: var(--primary);
 }
@@ -430,17 +430,170 @@
   text-decoration: underline;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card {
-  background-color: var(--accent);
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card {
+  background-color: white;
   color: var(--primary);
   width: 100%;
-  padding: 2.5rem 2rem;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   border-radius: 0.5rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item {
-  width: 85%;
-  margin: 0 auto;
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item {
+    width: 100%;
+  }
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc {
+  width: 100%;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__img {
+  margin-right: 1rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__img img {
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .user {
+  font-weight: 500;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .verified {
+  color: green;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-style: italic;
+  margin-left: 0.5rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__rating {
+  margin-bottom: 1rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__rating span {
+  margin-right: 0.5rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__rating span i {
+  color: var(--secondary);
+  font-size: 1.25rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc p {
+  line-height: 1.25rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form {
+  padding: 2rem 0;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar h3 i {
+  margin-right: 0.5rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar h3 span {
+  font-weight: 600;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar button {
+  background-color: var(--secondary);
+  color: var(--primary);
+  width: 10rem;
+  border-radius: 0.5rem;
+  border: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form .comment__bar button {
+    font-size: 1rem;
+  }
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form textarea {
+  width: 100%;
+  background: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: none;
+  color: var(--primary);
+  margin: 1rem 0;
+  padding: 1.25rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 2rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form textarea:focus {
+  border: 1px var(--secondary) solid;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__box form button {
+  width: 20%;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: none;
+  -webkit-transition: .3s;
+  transition: .3s;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: var(--accent);
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .account__creation {
+  padding: 2rem 0;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .account__creation h3 {
+  margin-bottom: 1rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .account__creation .social__login {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -452,24 +605,33 @@
           align-items: center;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--img {
-  width: 15%;
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .account__creation .social__login button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 25rem;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  color: var(--accent);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 3.562rem;
+  padding: 0.625rem 1.875rem;
+  cursor: pointer;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--img img {
-  width: 5.5rem;
-  border-radius: 50%;
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .account__creation .social__login button img {
+  width: 2rem;
 }
 
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--desc {
-  width: 90%;
-}
-
-.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment--card .comment--item .comment--desc .verified {
-  color: #04c804;
-  font-size: 0.875rem;
-  font-weight: 700;
-  font-style: italic;
+.playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .account__creation .social__login button span {
+  margin-left: 0.5rem;
 }
 
 .playlist .playlist__content .playlist__container .playlist__details .show-modal {
