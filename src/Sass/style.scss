@@ -291,3 +291,12 @@ a, select , input , textarea , button{
         }
     }
 }
+
+.base{
+    padding-top: 4rem;
+    min-height: 65vh;
+    .hero__sub{
+        display: flex;
+        justify-content: center;
+    }
+}

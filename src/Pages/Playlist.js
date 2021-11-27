@@ -3,7 +3,7 @@ import AppStore from '../Components/AppStore/AppStore';
 import Footer from "../Components/Footer/Footer";
 import Header from "../Components/Header/Header";
 
-const Home = () => {
+const Playlist = () => {
 
     return (
         <>
@@ -16,4 +16,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Playlist;

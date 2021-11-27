@@ -7,6 +7,7 @@ import {
 import './Sass/style.css';
 import PlayList from './Pages/Playlist.js';
 import AuthProvider from './contexts/AuthProvider/AuthProvider';
+import Home from './Pages/Home';
 
 function App() {
   return (
@@ -18,10 +19,10 @@ function App() {
                       <PlayList/>
                   </Route>
                   <Route path="/home">
-                      
+                      <Home/>
                   </Route>
                   <Route exact path="/">
-
+                      <Home/>
                   </Route>
                   <Route path="*">
                   </Route>

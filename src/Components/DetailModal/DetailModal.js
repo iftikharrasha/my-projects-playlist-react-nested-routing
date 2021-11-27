@@ -59,7 +59,7 @@ const DetailModal = (props) => {
         fetch(url)
         .then(res => res.json())
         .then(data => setReviews(data));
-    }, [])
+    }, [reviews])
 
     //google login
     const handleGoogleSignIn = () => {

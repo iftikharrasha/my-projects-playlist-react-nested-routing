@@ -84,7 +84,7 @@ const useFirebase = () => {
 
     const saveUser = (email, displayName, photoURL, accessToken, method) => {
         const user = { email, displayName, photoURL, accessToken };
-        fetch('http://localhost:5000/subscribers', {
+        fetch('https://still-peak-02811.herokuapp.com/subscribers', {
             method: method,
             headers: {
                 'content-type': 'application/json'

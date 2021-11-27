@@ -1119,4 +1119,18 @@ a, select, input, textarea, button {
   -webkit-transform: translateX(2rem);
           transform: translateX(2rem);
 }
+
+.base {
+  padding-top: 4rem;
+  min-height: 65vh;
+}
+
+.base .hero__sub {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
 /*# sourceMappingURL=style.css.map */
