@@ -9,6 +9,7 @@ const FullStack = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [projects, setProjects] = useState([]);
+    const [allCounts, setAllCounts] = useState([]);
     const [details, setDetails] = useState({});
 
     useEffect(() => {
@@ -28,8 +29,18 @@ const FullStack = () => {
         })
         .finally(() => setIsLoading(false));
     }, [projects])
-    
 
+    useEffect(() => {
+        let url;
+        url = `https://still-peak-02811.herokuapp.com/projects/`;
+        
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            setAllCounts(data.length);
+        })
+    }, [])
+    
     const handleModal = (project) => {
         const modalContainer = document.getElementById('modal-container');
         modalContainer.classList.add('show-modal');
@@ -39,6 +50,11 @@ const FullStack = () => {
 
     return (
         <>
+            <div className="counts">
+                <p>Total Projects: {allCounts}</p>
+                <p>Now Showing: {projects.length}</p>
+            </div>
+
             <div className="app__inside">
                 {
                     !isLoading && projects.map((project) => (

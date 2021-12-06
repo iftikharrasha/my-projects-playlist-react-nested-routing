@@ -17,33 +17,33 @@ const useFirebase = () => {
         setFetching(true);
         signInWithPopup(auth, googleProvider)
         .then((result) => {
-                const user = result.user;
-                // console.log(user);
-                const {displayName, email, photoURL, accessToken} = user;
+            const user = result.user;
+            // console.log(user);
+            const {displayName, email, photoURL, accessToken} = user;
 
-                //upset to database for new user
-                saveUser(user.email, user.displayName, user.photoURL, user.accessToken, 'PUT');
+            //upset to database for new user
+            saveUser(user.email, user.displayName, user.photoURL, user.accessToken, 'PUT');
 
-                localStorage.setItem('token', accessToken);
-                setAuthError('');
-                const signedInUser = {
-                    isSignedIn: true,
-                    email: email,
-                    photo: photoURL,
-                    success: true,
-                    name: displayName
-                };
-                // setAuthToken();
-                setLoggedInUser(signedInUser);
-                const destination = location?.state?.from || '/playlist';
-                history.replace(destination);
-                toast.success("Successfully signed in!", {
-                    position: "bottom-center"
-                });
-            }).catch((error) => {
-                setAuthError(error.message);
-            })
-            .finally(() => setFetching(false));
+            localStorage.setItem('token', accessToken);
+            setAuthError('');
+            const signedInUser = {
+                isSignedIn: true,
+                email: email,
+                photo: photoURL,
+                success: true,
+                name: displayName
+            };
+            // setAuthToken();
+            setLoggedInUser(signedInUser);
+            const destination = location?.state?.from || '/playlist';
+            history.replace(destination);
+            toast.success("Successfully signed in!", {
+                position: "bottom-center"
+            });
+        }).catch((error) => {
+            setAuthError(error.message);
+        })
+        .finally(() => setFetching(false));
     }
 
     // observer user state

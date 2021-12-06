@@ -123,6 +123,15 @@
   display: block;
 }
 
+.playlist .playlist__content .playlist__container .playlist__sidebar ul .refresh {
+  background-color: rgba(0, 0, 0, 0);
+  text-align: right;
+}
+
+.playlist .playlist__content .playlist__container .playlist__sidebar ul .refresh a {
+  color: white;
+}
+
 .playlist .playlist__content .playlist__container .playlist__details {
   width: 80%;
   background-color: var(--accent);
@@ -479,6 +488,9 @@
 
 .playlist .playlist__content .playlist__container .playlist__details .modal__container .modal__content .content__details .content__review .comment__card .comment__item .comment__desc .desc__top .comment__img img {
   width: 4rem;
+  height: 4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 
@@ -702,6 +714,17 @@
   right: 0;
   padding: 1rem;
   padding-right: 2rem;
+  margin-right: 2rem;
+}
+
+.playlist .playlist__content .playlist__container .playlist__details .counts {
+  position: absolute;
+  color: var(--accent);
+  top: 8rem;
+  right: 0;
+  padding: 1rem;
+  padding-right: 2rem;
+  margin-right: 2rem;
 }
 
 .footer .copyright {

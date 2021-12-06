@@ -15,10 +15,9 @@ const AppStore = () => {
     const categories = [
         { id: 1, name: "React Web Apps", to: "full-stack", className: "nav_item", idName: "react" },
         { id: 2, name: "PSD to HTML", to: "psd-to-html", className: "nav_item", idName: "psd" },
-        { id: 3, name: "Fun With API", to: "fun-with-api", className: "nav_item", idName: "api" },
+        { id: 3, name: "Fun With JS & API", to: "fun-with-api", className: "nav_item", idName: "api" },
         { id: 4, name: "Email Templates", to: "email-templates", className: "nav_item", idName: "email" },
-        { id: 5, name: "UI/UX Design", to: "ui-ux-design", className: "nav_item", idName: "ui" },
-        { id: 6, name: "Codepens", to: "my-pens", className: "nav_item", idName: "pen" }
+        { id: 5, name: "PHP MYSQL", to: "php-mysql", className: "nav_item", idName: "pen" }
     ];
 
     return (
@@ -26,7 +25,7 @@ const AppStore = () => {
             <section className="playlist">
                 <div className="wrapper">
                     <div className="playlist__content" id="playlist">
-                        <h2 className="bigReg--100 text--center">Front End Playlist</h2>
+                        <h2 className="bigReg--100 text--center">My Projects Playlist</h2>
                         <div className="playlist__container">
                             <div className="playlist__sidebar">
                                 <ul>
@@ -35,6 +34,7 @@ const AppStore = () => {
                                             <li key={link.id} onClick={() => setActive(true)} className={`nav_link ${active === true && 'active'}`} id={link.idName}><Link to={`${url}/${link.to}`} className="reg--24">{link.name}</Link></li>
                                         )
                                     }
+                                    <li className="refresh"><a href="https://my-playlist-c979c.web.app/playlist"><i class="fa fa-refresh" aria-hidden="true"> Refresh</i></a></li>
                                 </ul>
                             </div>
                             <div className="playlist__details">

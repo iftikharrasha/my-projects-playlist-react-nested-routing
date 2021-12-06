@@ -48,6 +48,13 @@
                             display: block;
                         }
                     }
+                    .refresh{
+                        background-color: rgba(0,0,0,0);
+                        text-align: right;
+                        a{
+                            color: white;
+                        }
+                    }
                 }
             }
             .playlist__details{
@@ -274,6 +281,8 @@
                                                     margin-right: 1rem;
                                                     img {
                                                         width: 4rem;
+                                                        height: 4rem;
+                                                        object-fit: cover;
                                                         border-radius: 50%;
                                                     }
                                                 }
@@ -439,6 +448,16 @@
                     right: 0;
                     padding: 1rem;
                     padding-right: 2rem;
+                    margin-right: 2rem;
+                }
+                .counts{
+                    position: absolute;
+                    color: $accent;
+                    top: 8rem;
+                    right: 0;
+                    padding: 1rem;
+                    padding-right: 2rem;
+                    margin-right: 2rem;
                 }
             }
         }
