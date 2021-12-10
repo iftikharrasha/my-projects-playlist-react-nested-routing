@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory, useLocation } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
@@ -6,7 +6,6 @@ import githubLogo from '../../Image/github.svg';
 import portfolioLogo from '../../Image/portfolio.svg';
 import fiverrLogo from '../../Image/fiverr.svg';
 import behanceLogo from '../../Image/behance.svg';
-import { useEffect } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import moment from 'moment';
 
@@ -155,8 +154,12 @@ const DetailModal = (props) => {
         }
     };
 
-    const date = new Date().toISOString().slice(0, 10);
-    const dateId = date.replace(/-/g, "");
+    // const date = new Date().toISOString().slice(0, 10);
+    const date = new Date().toISOString();
+    // const dateSort = date.replace(/-/g, "");
+    // const IsoDateTo = moment(date).format('YYYY-MM-DD[T]HH:mm:ss');
+    // const delayDate = moment("2021-12-10T13:15:54.010Z").fromNow();
+    // console.log(date, IsoDateTo, delayDate);
     const author = loggedInUser.name;
     const img = loggedInUser.photo;
     const commentRef = useRef();
@@ -169,7 +172,7 @@ const DetailModal = (props) => {
         // const userId = loggedInUser.id;
         const status = 'verified';
 
-        const newReview = { projectId, author, img, comment, rating, status, dateId };
+        const newReview = { projectId, author, img, comment, rating, status, date };
         fetch('https://still-peak-02811.herokuapp.com/add-review', {
             method: 'POST',
             headers: {
@@ -317,7 +320,7 @@ const DetailModal = (props) => {
                                                                     <span className="verified">{featured[0].status}</span>
                                                                     <div className="story-rating">
                                                                         <ReactStars {...ratingCount} value={featured[0].rating} edit={false}/>
-                                                                        <span className="reg--18 time">{moment(featured[0].dateId, "YYYYMMDD").fromNow()}</span>
+                                                                        <span className="reg--18 time">{moment(featured[0].dateId).fromNow()}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -342,7 +345,7 @@ const DetailModal = (props) => {
                                                 <span className="verified">{review.status}</span>
                                                 <div className="story-rating">
                                                     <ReactStars {...ratingCount} value={review.rating} edit={false}/>
-                                                    <span className="reg--18 time">{moment(review.dateId, "YYYYMMDD").fromNow()}</span>
+                                                    <span className="reg--18 time">{moment(review.date).fromNow()}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -364,7 +367,7 @@ const DetailModal = (props) => {
                                                                     </div>
                                                                     <textarea ref={commentRef} rows="3" cols="40" className="reg--24" required placeholder="Write your review here . . ."></textarea>
                                                                     <span className="story-rating">
-                                                                        <h3 className="reg--24">Leave your Rating:</h3>
+                                                                        <h3 className="reg--24">Select your Rating:</h3>
                                                                         <ReactStars {...ratingCount} />
                                                                     </span>
                                                                     <button className="reg--24">Submit</button>
