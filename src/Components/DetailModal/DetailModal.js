@@ -8,6 +8,8 @@ import fiverrLogo from '../../Image/fiverr.svg';
 import behanceLogo from '../../Image/behance.svg';
 import useAuth from '../../Hooks/useAuth';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { postViews } from '../../Redux/Slices/projectSlice';
 
 const DetailModal = (props) => {
     const { _id, logo, title, link, desc, techs, ui, repo, behance, loves, views, featured } = props.details;
@@ -19,23 +21,28 @@ const DetailModal = (props) => {
     const history = useHistory();
     const location = useLocation();
 
+    const dispatch = useDispatch();
     useEffect(() => {
-        let url = `https://still-peak-02811.herokuapp.com/views/${_id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(props.details)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.modifiedCount > 0){
-                props.setDetails(props.details);
-            }else{
-                console.log('API Stoinks! 😃');
-            }
-        })
+        dispatch(postViews(props.details));
+        props.setDetails(props.details);
+    }, [])
+
+    useEffect(() => {
+        // let url = `https://still-peak-02811.herokuapp.com/views/${_id}`;
+        // fetch(url, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(props.details)
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //     if(data.modifiedCount > 0){
+        //     }else{
+        //         console.log('API Stoinks! 😃');
+        //     }
+        // })
 
         //checking liked for color
         const exists = getStorage();

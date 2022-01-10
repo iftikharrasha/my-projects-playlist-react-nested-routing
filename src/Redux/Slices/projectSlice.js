@@ -12,7 +12,7 @@ export const fetchProjects = createAsyncThunk(
 export const postReacts = createAsyncThunk(
     'project/postReacts',
     async (project) => {
-        let url = `https://still-peak-02811.herokuapp.com/views/${project._id}`;
+        let url = `https://still-peak-02811.herokuapp.com/reaction/${project._id}`;
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -38,7 +38,7 @@ export const postReacts = createAsyncThunk(
 export const postViews = createAsyncThunk(
     'project/postViews',
     async (project) => {
-        let url = `https://still-peak-02811.herokuapp.com/reaction/${project._id}`;
+        let url = `https://still-peak-02811.herokuapp.com/views/${project._id}`;
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -110,7 +110,7 @@ const projectSlice = createSlice({
         })
 
         builder.addCase(postReacts.fulfilled, (state, action) => {
-            state.projectsList = state.projectsList.map(project => project._id === action.payload._id ? {...project, react: project.react + 1 } : project);
+            state.projectsList = state.projectsList.map(project => project._id === action.payload._id ? {...project, loves: project.react + 1 } : project);
             state.status = 'success';
         })
 

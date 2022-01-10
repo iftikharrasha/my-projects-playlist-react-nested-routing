@@ -23,7 +23,7 @@ const FullStack = () => {
         }
         setProjectsFiltered(filtered);
         setIsLoading(false);
-    }, [categoryPath])
+    }, [categoryPath, allProjects])
     
     const handleModal = (project) => {
         const modalContainer = document.getElementById('modal-container');
