@@ -11,7 +11,7 @@ const FullStack = () => {
     const [projects, setProjects] = useState([]);
     const [allCounts, setAllCounts] = useState([]);
     const [details, setDetails] = useState({});
-
+    
     useEffect(() => {
         let url;
         if(categoryPath === undefined) {

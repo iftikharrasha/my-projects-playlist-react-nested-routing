@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
     Switch,
     Route,
     Link,
     useRouteMatch
 } from "react-router-dom";
+import { fetchProjects } from '../../Redux/Slices/projectSlice';
 import AppDetail from '../AppDetail/AppDetail';
+import { useSelector } from 'react-redux';
 
 const AppStore = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchProjects());
+    }, [dispatch])
+
+    const allProjects = useSelector((state) => state.projects.projectsList);
+    console.log(allProjects);
+    
     let { path, url } = useRouteMatch();
     const [active, setActive] = useState(false);
 
@@ -34,7 +45,7 @@ const AppStore = () => {
                                             <li key={link.id} onClick={() => setActive(true)} className={`nav_link ${active === true && 'active'}`} id={link.idName}><Link to={`${url}/${link.to}`} className="reg--24">{link.name}</Link></li>
                                         )
                                     }
-                                    <li className="refresh"><a href="https://my-playlist-c979c.web.app/playlist"><i class="fa fa-refresh" aria-hidden="true"> Refresh</i></a></li>
+                                    <li className="refresh"><a href="https://my-playlist-c979c.web.app/playlist"><i className="fa fa-refresh" aria-hidden="true"> Refresh</i></a></li>
                                 </ul>
                             </div>
                             <div className="playlist__details">
