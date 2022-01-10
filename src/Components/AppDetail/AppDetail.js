@@ -2,44 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import loader from '../../Image/loader.gif';
 import DetailModal from '../DetailModal/DetailModal';
+import { useSelector } from 'react-redux';
 
 const FullStack = () => {
     const { categoryPath } = useParams();
     
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [projects, setProjects] = useState([]);
-    const [allCounts, setAllCounts] = useState([]);
+    const [projectsFiltered, setProjectsFiltered] = useState([]);
     const [details, setDetails] = useState({});
+
+    const allProjects = useSelector((state) => state.projects.projectsList);
     
     useEffect(() => {
-        let url;
+        let filtered;
         if(categoryPath === undefined) {
-            url = `https://still-peak-02811.herokuapp.com/projects/full-stack`;
+            filtered  = allProjects.filter(project =>  project.category === 'full-stack');
         }else{
-            url = `https://still-peak-02811.herokuapp.com/projects/${categoryPath}`;
+            filtered  = allProjects.filter(project =>  project.category === categoryPath);
         }
-        fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            setProjects(data);
-        })
-        .catch((error) => {
-            console.log('category fetch error!', error);
-        })
-        .finally(() => setIsLoading(false));
-    }, [projects])
-
-    useEffect(() => {
-        let url;
-        url = `https://still-peak-02811.herokuapp.com/projects/`;
-        
-        fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            setAllCounts(data.length);
-        })
-    }, [])
+        setProjectsFiltered(filtered);
+        setIsLoading(false);
+    }, [categoryPath])
     
     const handleModal = (project) => {
         const modalContainer = document.getElementById('modal-container');
@@ -51,13 +35,13 @@ const FullStack = () => {
     return (
         <>
             <div className="counts">
-                <p>Total Projects: {allCounts}</p>
-                <p>Now Showing: {projects.length}</p>
+                <p>Total Projects: {allProjects.length}</p>
+                <p>Now Showing: {projectsFiltered.length}</p>
             </div>
 
             <div className="app__inside">
                 {
-                    !isLoading && projects.map((project) => (
+                    !isLoading && projectsFiltered.map((project) => (
                                     <div className="app__single" key={project._id}>
                                         <button className="reg--24" onClick={() => handleModal(project)}>
                                             <img src={project.logo} alt="logo"/>

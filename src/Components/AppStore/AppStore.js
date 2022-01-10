@@ -9,16 +9,12 @@ import {
 } from "react-router-dom";
 import { fetchProjects } from '../../Redux/Slices/projectSlice';
 import AppDetail from '../AppDetail/AppDetail';
-import { useSelector } from 'react-redux';
 
 const AppStore = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProjects());
     }, [dispatch])
-
-    const allProjects = useSelector((state) => state.projects.projectsList);
-    console.log(allProjects);
     
     let { path, url } = useRouteMatch();
     const [active, setActive] = useState(false);
