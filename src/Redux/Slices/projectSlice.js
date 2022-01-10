@@ -61,21 +61,30 @@ export const postViews = createAsyncThunk(
     }
 )
 
-export const postCreate = createAsyncThunk(
-    'project/postCreate',
-    async (project) => {
-        let url = 'https://rocky-retreat-69417.herokuapp.com/add-project';
+export const fetchReviews = createAsyncThunk(
+    'project/fetchReviews',
+    async () => {
+      const response = await fetch('http://localhost:5000/reviews')
+      .then(res => res.json())
+      return response
+    }
+)
+
+export const addReview = createAsyncThunk(
+    'project/addReview',
+    async (review) => {
+        let url = 'https://still-peak-02811.herokuapp.com/add-review';
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(project)
+            body: JSON.stringify(review)
         })
         .then(res => res.json())
         .then(data => {
             if(data.insertedId){
-                return project
+                return review
             }else{
                 console.log('No response!');
             }
@@ -91,7 +100,7 @@ const projectSlice = createSlice({
     name: 'project',
     initialState: {
         projectsList: [],
-        wishList: [],
+        reviewsList: [],
         status: 'idle',
     },
     reducers: {
@@ -110,7 +119,7 @@ const projectSlice = createSlice({
         })
 
         builder.addCase(postReacts.fulfilled, (state, action) => {
-            state.projectsList = state.projectsList.map(project => project._id === action.payload._id ? {...project, loves: project.react + 1 } : project);
+            state.projectsList = state.projectsList.map(project => project._id === action.payload._id ? {...project, loves: project.loves + 1 } : project);
             state.status = 'success';
         })
 
@@ -119,8 +128,13 @@ const projectSlice = createSlice({
             state.status = 'success';
         })
 
-        builder.addCase(postCreate.fulfilled, (state, action) => {
-            state.projectsList = [...state.projectsList, action.payload];
+        builder.addCase(fetchReviews.fulfilled, (state, action) => {
+            state.reviewsList = action.payload;
+            state.status = 'success';
+        })
+
+        builder.addCase(addReview.fulfilled, (state, action) => {
+            state.reviewsList = [...state.reviewsList, action.payload];
             state.status = 'success';
         })
     },

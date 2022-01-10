@@ -10,26 +10,33 @@ const FullStack = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [projectsFiltered, setProjectsFiltered] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const [details, setDetails] = useState({});
 
     const allProjects = useSelector((state) => state.projects.projectsList);
+    const allReviews = useSelector((state) => state.projects.reviewsList);
     
     useEffect(() => {
-        let filtered;
+        let filteredProjects;
         if(categoryPath === undefined) {
-            filtered  = allProjects.filter(project =>  project.category === 'full-stack');
+            filteredProjects  = allProjects.filter(project =>  project.category === 'full-stack');
         }else{
-            filtered  = allProjects.filter(project =>  project.category === categoryPath);
+            filteredProjects  = allProjects.filter(project =>  project.category === categoryPath);
         }
-        setProjectsFiltered(filtered);
+        setProjectsFiltered(filteredProjects);
         setIsLoading(false);
-    }, [categoryPath, allProjects])
+    }, [categoryPath, allProjects, allReviews])
     
     const handleModal = (project) => {
-        const modalContainer = document.getElementById('modal-container');
-        modalContainer.classList.add('show-modal');
+        let filteredReviews;
+        filteredReviews  = allReviews.filter(review =>  review.projectId === project._id);
+
+        setReviews(filteredReviews);
         setDetails(project);
         setIsModalOpen(true);
+
+        const modalContainer = document.getElementById('modal-container');
+        modalContainer.classList.add('show-modal');
     }
 
     return (
@@ -59,7 +66,7 @@ const FullStack = () => {
             </div>
             <section className="modal__container" id="modal-container">
                 {
-                    isModalOpen && <DetailModal details={details} key={details._id} setIsModalOpen={setIsModalOpen} setDetails={setDetails}/>
+                    isModalOpen && <DetailModal details={details} reviews={reviews} key={details._id} setIsModalOpen={setIsModalOpen} setDetails={setDetails}/>
                 }
             </section>
         </>

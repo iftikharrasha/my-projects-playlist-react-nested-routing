@@ -7,13 +7,14 @@ import {
     Link,
     useRouteMatch
 } from "react-router-dom";
-import { fetchProjects } from '../../Redux/Slices/projectSlice';
+import { fetchProjects, fetchReviews } from '../../Redux/Slices/projectSlice';
 import AppDetail from '../AppDetail/AppDetail';
 
 const AppStore = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProjects());
+        dispatch(fetchReviews());
     }, [dispatch])
     
     let { path, url } = useRouteMatch();

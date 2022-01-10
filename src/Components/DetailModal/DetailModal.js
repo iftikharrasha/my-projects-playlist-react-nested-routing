@@ -9,40 +9,25 @@ import behanceLogo from '../../Image/behance.svg';
 import useAuth from '../../Hooks/useAuth';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { postViews } from '../../Redux/Slices/projectSlice';
+import { addReview, postReacts, postViews } from '../../Redux/Slices/projectSlice';
 
 const DetailModal = (props) => {
     const { _id, logo, title, link, desc, techs, ui, repo, behance, loves, views, featured } = props.details;
+    const { reviews } = props;
+    console.log(reviews);
+
     const [reacts, setReacts] = useState(loves);
     const [rating, setRating] = useState(0);
-    const [reviews, setReviews] = useState([]);
-    const { loggedInUser, signInWithGoogle, logoutUser, authError } = useAuth();
+    const { loggedInUser, signInWithGoogle, logoutUser } = useAuth();
 
     const history = useHistory();
     const location = useLocation();
 
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(postViews(props.details));
         props.setDetails(props.details);
-    }, [])
-
-    useEffect(() => {
-        // let url = `https://still-peak-02811.herokuapp.com/views/${_id}`;
-        // fetch(url, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(props.details)
-        // })
-        // .then(res => res.json())
-        // .then(data => {
-        //     if(data.modifiedCount > 0){
-        //     }else{
-        //         console.log('API Stoinks! 😃');
-        //     }
-        // })
 
         //checking liked for color
         const exists = getStorage();
@@ -57,15 +42,12 @@ const DetailModal = (props) => {
                 document.getElementById('icon-heart').style.color = '$primary';
             }
         }
-    }, [])
 
-    
-    useEffect(() => {
-        let url = `https://still-peak-02811.herokuapp.com/reviews/${_id}`;
-        fetch(url)
-        .then(res => res.json())
-        .then(data => setReviews(data));
-    }, [reviews])
+        // let url = `https://still-peak-02811.herokuapp.com/reviews/${_id}`;
+        // fetch(url)
+        // .then(res => res.json())
+        // .then(data => setReviews(data));
+    }, [dispatch])
 
     //google login
     const handleGoogleSignIn = () => {
@@ -85,31 +67,11 @@ const DetailModal = (props) => {
                 icon: '👏',
             });
         }else{
-            let url = `https://still-peak-02811.herokuapp.com/reaction/${id}`;
-            fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(props.details)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.modifiedCount > 0){
-                    document.getElementById('icon-heart').style.color = 'red';
-                    toast.dismiss(loading);
-                    toast.success('Thanks for the appreciation! 😃');
-                    setReacts(reacts+1);
-                }else{
-                    toast.dismiss(loading);
-                    toast("You've already liked it!", {
-                        icon: '👏',
-                    });
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+            dispatch(postReacts(props.details));
+            setReacts(reacts+1);
+            toast.dismiss(loading);
+            toast.success('Thanks for the appreciation! 😃');
+            document.getElementById('icon-heart').style.color = 'red';
         }
     }
 
@@ -161,12 +123,7 @@ const DetailModal = (props) => {
         }
     };
 
-    // const date = new Date().toISOString().slice(0, 10);
     const date = new Date().toISOString();
-    // const dateSort = date.replace(/-/g, "");
-    // const IsoDateTo = moment(date).format('YYYY-MM-DD[T]HH:mm:ss');
-    // const delayDate = moment("2021-12-10T13:15:54.010Z").fromNow();
-    // console.log(date, IsoDateTo, delayDate);
     const author = loggedInUser.name;
     const img = loggedInUser.photo;
     const commentRef = useRef();
@@ -176,30 +133,19 @@ const DetailModal = (props) => {
         toast.dismiss(loading);
         const comment = commentRef.current.value;
         const projectId = _id;
-        // const userId = loggedInUser.id;
         const status = 'verified';
 
         const newReview = { projectId, author, img, comment, rating, status, date };
-        fetch('https://still-peak-02811.herokuapp.com/add-review', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newReview)
-        })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.insertedId){
-                toast.dismiss(loading);
-                toast.success("Successfully added your review!", {
-                    position: "bottom-center"
-                });
-                e.target.reset();
-            }else{
-                toast.dismiss(loading);
-                toast.error('Something went wrong!');
-            }
-        })
+        if(dispatch(addReview(newReview))){
+            toast.dismiss(loading);
+            toast.success("Successfully added your review!", {
+                position: "bottom-center"
+            });
+            e.target.reset();
+        }else{
+            toast.dismiss(loading);
+            toast.error('Something went wrong!');
+        }
 
         e.preventDefault();
     }
@@ -234,7 +180,7 @@ const DetailModal = (props) => {
                             <ul>
                                 {
                                     techs.map(tech => (
-                                        <li className="reg--24" key={tech.No}>{tech.tool}</li>
+                                        <li className="reg--24" key={tech.No+(Math.random() + 1).toString(36).substring(7)}>{tech.tool}</li>
                                     ))
                                 }
                             </ul>
@@ -296,7 +242,6 @@ const DetailModal = (props) => {
                                             featured ? <p>{reviews.length + 1}</p>
                                             : <p>{reviews.length}</p>
                                         }
-                                        
                                     </button>
                                     <p>Reviews</p>
                                 </div>
