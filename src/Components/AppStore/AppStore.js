@@ -42,7 +42,10 @@ const AppStore = () => {
                                             <li key={link.id} onClick={() => setActive(true)} className={`nav_link ${active === true && 'active'}`} id={link.idName}><Link to={`${url}/${link.to}`} className="reg--24">{link.name}</Link></li>
                                         )
                                     }
-                                    <li className="refresh"><a href="https://my-playlist-c979c.web.app/playlist"><i className="fa fa-refresh" aria-hidden="true"> Refresh</i></a></li>
+                                    <li className="refresh">
+                                        <a href="https://my-playlist-c979c.web.app/playlist"><i className="fa fa-refresh" aria-hidden="true"> Refresh</i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div className="playlist__details">

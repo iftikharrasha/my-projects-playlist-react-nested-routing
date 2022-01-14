@@ -8,13 +8,22 @@ import fiverrLogo from '../../Image/fiverr.svg';
 import behanceLogo from '../../Image/behance.svg';
 import useAuth from '../../Hooks/useAuth';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addReview, postReacts, postViews } from '../../Redux/Slices/projectSlice';
 
 const DetailModal = (props) => {
-    const { _id, logo, title, link, desc, techs, ui, repo, behance, loves, views, featured } = props.details;
-    const { reviews } = props;
-    console.log(reviews);
+    const { _id, views, loves, techs } = props.details;
+
+    const [details, setDetails] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const allProjects = useSelector((state) => state.projects.projectsList);
+    const allReviews = useSelector((state) => state.projects.reviewsList);
+    useEffect(() => {
+        const thisProject  = allProjects.find(project =>  project._id === _id);
+        const thisReview  = allReviews.filter(review =>  review.projectId === _id);
+        setDetails(thisProject);
+        setReviews(thisReview);
+    }, [_id, allProjects, allReviews, details, reviews])
 
     const [reacts, setReacts] = useState(loves);
     const [rating, setRating] = useState(0);
@@ -24,10 +33,8 @@ const DetailModal = (props) => {
     const location = useLocation();
 
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(postViews(props.details));
-        props.setDetails(props.details);
 
         //checking liked for color
         const exists = getStorage();
@@ -42,12 +49,7 @@ const DetailModal = (props) => {
                 document.getElementById('icon-heart').style.color = '$primary';
             }
         }
-
-        // let url = `https://still-peak-02811.herokuapp.com/reviews/${_id}`;
-        // fetch(url)
-        // .then(res => res.json())
-        // .then(data => setReviews(data));
-    }, [dispatch])
+    }, [views])
 
     //google login
     const handleGoogleSignIn = () => {
@@ -67,7 +69,7 @@ const DetailModal = (props) => {
                 icon: '👏',
             });
         }else{
-            dispatch(postReacts(props.details));
+            dispatch(postReacts(details));
             setReacts(reacts+1);
             toast.dismiss(loading);
             toast.success('Thanks for the appreciation! 😃');
@@ -167,15 +169,15 @@ const DetailModal = (props) => {
 
                     <div className="content__details">
                         <div className="content__logo">
-                            <img src={logo} alt={logo}/>
+                            <img src={details.logo} alt={details.logo}/>
                             <div className="content__text">
-                                <p className="reg--36">{title}</p>
-                                <a href={link} target="_blank" rel="noopener noreferrer"><button>Live Preview</button></a>
+                                <p className="reg--36">{details.title}</p>
+                                <a href={details.link} target="_blank" rel="noopener noreferrer"><button>Live Preview</button></a>
                             </div>
                         </div>
                         <div className="content__desc">
                             <h4 className="reg--36">Description</h4>
-                            <p className="reg--24">{desc}</p>
+                            <p className="reg--24">{details.desc}</p>
                             <h4 className="reg--36">Tech Stack</h4>
                             <ul>
                                 {
@@ -187,7 +189,7 @@ const DetailModal = (props) => {
                         </div>
 
                         <div className="content__extra">
-                            <a href={repo} target="_blank" rel="noopener noreferrer">
+                            <a href={details.repo} target="_blank" rel="noopener noreferrer">
                                 <div className="extra__icon">
                                     <img src={githubLogo} alt={githubLogo}/>
                                     <p>Git Repo</p>
@@ -195,7 +197,7 @@ const DetailModal = (props) => {
                             </a>
 
                             {
-                                behance &&  <a href={behance} target="_blank" rel="noopener noreferrer">
+                                details.behance &&  <a href={details.behance} target="_blank" rel="noopener noreferrer">
                                                 <div className="extra__icon">
                                                     <img src={behanceLogo} alt={behanceLogo}/>
                                                     <p>Behance</p>
@@ -229,7 +231,7 @@ const DetailModal = (props) => {
                             <div className="extra__icon">
                                 <button type="button" className="react">
                                     <i className="fa fa-eye" id="icon-heart"></i>
-                                    <p>{views}</p>
+                                    <p>{details.views}</p>
                                 </button>
                                 <p>Views</p>
                             </div>
@@ -239,7 +241,7 @@ const DetailModal = (props) => {
                                     <button type="button" className="react">
                                         <i className="fa fa-star star" id="icon-heart"></i>
                                         {
-                                            featured ? <p>{reviews.length + 1}</p>
+                                            details.featured ? <p>{reviews.length + 1}</p>
                                             : <p>{reviews.length}</p>
                                         }
                                     </button>
@@ -248,7 +250,7 @@ const DetailModal = (props) => {
                             </a>
                         </div>
                         <div className="content__ui">
-                            <img src={ui} alt="ui" className="img-fluid"/>
+                            <img src={details.ui} alt="ui" className="img-fluid"/>
                         </div>
 
                         <div className="content__review" id="reviews">
@@ -260,23 +262,23 @@ const DetailModal = (props) => {
                             } */}
 
                             {
-                                featured &&  <div className="comment__card">
+                                details.featured &&  <div className="comment__card">
                                                     <div className="comment__item">
                                                         <div className="comment__desc">
                                                             <div className="desc__top">
                                                                 <div className="comment__img">
-                                                                    <img src={featured[0].img} alt={featured[0].author}/>
+                                                                    <img src={details.featured[0].img} alt={details.featured[0].author}/>
                                                                 </div>
                                                                 <div>
-                                                                    <span className="reg--24 user">{featured[0].author}</span>
-                                                                    <span className="verified">{featured[0].status}</span>
+                                                                    <span className="reg--24 user">{details.featured[0].author}</span>
+                                                                    <span className="verified">{details.featured[0].status}</span>
                                                                     <div className="story-rating">
-                                                                        <ReactStars {...ratingCount} value={featured[0].rating} edit={false}/>
-                                                                        <span className="reg--18 time">{moment(featured[0].dateId).fromNow()}</span>
+                                                                        <ReactStars {...ratingCount} value={details.featured[0].rating} edit={false}/>
+                                                                        <span className="reg--18 time">{moment(details.featured[0].dateId).fromNow()}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <p>{featured[0].comment}</p>
+                                                            <p>{details.featured[0].comment}</p>
                                                         </div>
                                                     </div>
                                                 </div>

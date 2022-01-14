@@ -10,7 +10,6 @@ const FullStack = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [projectsFiltered, setProjectsFiltered] = useState([]);
-    const [reviews, setReviews] = useState([]);
     const [details, setDetails] = useState({});
 
     const allProjects = useSelector((state) => state.projects.projectsList);
@@ -28,10 +27,6 @@ const FullStack = () => {
     }, [categoryPath, allProjects, allReviews])
     
     const handleModal = (project) => {
-        let filteredReviews;
-        filteredReviews  = allReviews.filter(review =>  review.projectId === project._id);
-
-        setReviews(filteredReviews);
         setDetails(project);
         setIsModalOpen(true);
 
@@ -66,7 +61,7 @@ const FullStack = () => {
             </div>
             <section className="modal__container" id="modal-container">
                 {
-                    isModalOpen && <DetailModal details={details} reviews={reviews} key={details._id} setIsModalOpen={setIsModalOpen} setDetails={setDetails}/>
+                    isModalOpen && <DetailModal details={details} key={details._id} setIsModalOpen={setIsModalOpen}/>
                 }
             </section>
         </>
