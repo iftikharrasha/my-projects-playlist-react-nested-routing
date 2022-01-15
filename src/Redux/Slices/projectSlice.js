@@ -64,7 +64,7 @@ export const postViews = createAsyncThunk(
 export const fetchReviews = createAsyncThunk(
     'project/fetchReviews',
     async () => {
-      const response = await fetch('http://localhost:5000/reviews')
+      const response = await fetch('https://still-peak-02811.herokuapp.com/reviews')
       .then(res => res.json())
       return response
     }
