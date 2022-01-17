@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import './Sass/style.css';
 import PlayList from './Pages/Playlist.js';
-import AuthProvider from './contexts/AuthProvider/AuthProvider';
+import AuthProvider from './Contexts/AuthProvider/AuthProvider';
 import Home from './Pages/Home';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 import Dashboard from './Pages/SecretBase/Dashboard/Dashboard';
