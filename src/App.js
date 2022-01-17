@@ -8,8 +8,6 @@ import './Sass/style.css';
 import PlayList from './Pages/Playlist.js';
 import AuthProvider from './Contexts/AuthProvider/AuthProvider';
 import Home from './Pages/Home';
-import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
-import Dashboard from './Pages/SecretBase/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -27,9 +25,6 @@ function App() {
                     <Route exact path="/">
                         <Home/>
                     </Route>
-                    <PrivateRoute path="/secret-base">
-                        <Dashboard/>
-                    </PrivateRoute>
                     <Route path="*">
                     </Route>
                 </Switch>
