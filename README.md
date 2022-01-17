@@ -99,12 +99,7 @@ A quick look at the top-level files hierarchy.
 | Color          | Hex                                                                |
 | -------------- | ------------------------------------------------------------------ |
 | Black          | ![#000000](https://via.placeholder.com/10/0000?text=+) `#000000` |
-| Green        | ![#03C952](https://via.placeholder.com/10/03C952?text=+) `#03C952` |
-| Pink        | ![#D831B2](https://via.placeholder.com/10/D831B2?text=+) `#D831B2` |
-| Purple        | ![#9035F9](https://via.placeholder.com/10/9035F9?text=+) `#9035F9` |
-| LiteBlue        | ![#010102](https://via.placeholder.com/10/010102?text=+) `#010102` |
-| Blue        | ![#130035](https://via.placeholder.com/10/130035?text=+) `#130035` |
-| DarkBlue        | ![#130035](https://via.placeholder.com/10/130035?text=+) `#130035` |
+| Primary        | ![#F4DD1E](https://via.placeholder.com/10/F4DD1E?text=+) `#F4DD1E` |
 | White          | ![#ffffff](https://via.placeholder.com/10/ffffff?text=+) `#ffffff` |
 
 
