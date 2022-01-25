@@ -1,4 +1,4 @@
-### `My Projects Playlist - Secret Base` [Live Link](https://secretobase.web.app/)
+### `Server Side` [Git Repo](https://github.com/iftikharrasha/my-projects-playlist-server)
 
 <p align="center">
   <a href="https://secretobase.web.app/">
