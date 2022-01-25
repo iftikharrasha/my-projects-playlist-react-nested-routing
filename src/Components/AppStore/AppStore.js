@@ -43,8 +43,8 @@ const AppStore = () => {
                                         )
                                     }
                                     <li className="refresh">
-                                        <a href="https://github.com/iftikharrasha/my-projects-playlist-redux" target="_blank" rel="noopener noreferrer"><i className="fa fa-github" aria-hidden="true"> GIT REPO</i>
-                                        </a>
+                                        <Link to="/dashboard"><i className="fa fa-tachometer" aria-hidden="true"> Dashboard</i>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

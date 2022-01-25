@@ -5,9 +5,12 @@ import {
   Route
 } from "react-router-dom";
 import './Sass/style.css';
-import PlayList from './Pages/Playlist.js';
 import AuthProvider from './Contexts/AuthProvider/AuthProvider';
 import Home from './Pages/Home';
+import Login from './Pages/Login';
+import PlayList from './Pages/Playlist.js';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -25,6 +28,12 @@ function App() {
                     <Route exact path="/">
                         <Home/>
                     </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <PrivateRoute path="/dashboard">
+                      <Dashboard/>
+                    </PrivateRoute>
                     <Route path="*">
                     </Route>
                 </Switch>
