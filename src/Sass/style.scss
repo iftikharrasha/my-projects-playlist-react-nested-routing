@@ -301,3 +301,9 @@ a, select , input , textarea , button{
         justify-content: center;
     }
 }
+
+.loading{
+    @include flexCenter;
+    min-height: 80vh;
+    margin: auto;
+}

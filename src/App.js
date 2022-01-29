@@ -9,7 +9,7 @@ import AuthProvider from './Contexts/AuthProvider/AuthProvider';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import PlayList from './Pages/Playlist.js';
-import Dashboard from './Pages/Dashboard/Dashboard';
+import ControlPanel from './Pages/ControlPanel/ControlPanel';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
                         <Login/>
                     </Route>
                     <PrivateRoute path="/dashboard">
-                      <Dashboard/>
+                      <ControlPanel/>
                     </PrivateRoute>
                     <Route path="*">
                     </Route>

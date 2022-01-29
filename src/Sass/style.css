@@ -250,6 +250,10 @@
   border-radius: 0.5rem;
 }
 
+.playlist .playlist__content .playlist__container .playlist__details .app__inside .loader h2 {
+  color: var(--primary);
+}
+
 .playlist .playlist__content .playlist__container .playlist__details .modal__container {
   position: absolute;
   top: 0;
@@ -1243,5 +1247,19 @@ a, select, input, textarea, button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.loading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 80vh;
+  margin: auto;
 }
 /*# sourceMappingURL=style.css.map */

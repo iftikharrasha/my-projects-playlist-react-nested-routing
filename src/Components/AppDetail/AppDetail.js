@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import loader from '../../Image/loader.gif';
-import DetailModal from '../DetailModal/DetailModal';
 import { useSelector } from 'react-redux';
+import DetailModal from '../DetailModal/DetailModal';
+import Lottie from 'react-lottie';
+import animationData from '../../Image/loading.json';
 
 const FullStack = () => {
     const { categoryPath } = useParams();
@@ -34,6 +35,15 @@ const FullStack = () => {
         modalContainer.classList.add('show-modal');
     }
 
+    const defaultOptions = {
+		loop: true,
+		autoplay: true, 
+		animationData: animationData,
+		rendererSettings: {
+		  preserveAspectRatio: 'xMidYMid slice'
+		}
+	};
+
     return (
         <>
             <div className="counts">
@@ -43,6 +53,19 @@ const FullStack = () => {
 
             <div className="app__inside">
                 {
+                    isLoading &&    <div className="loader">
+                                        <div>
+                                            <Lottie options={defaultOptions}
+                                                    height={100}
+                                                    width={100}/>
+                                            <h2 className="bar--18 text--center">
+                                                RASHA'21
+                                            </h2>
+                                        </div>
+                                    </div>
+                }
+
+                {
                     !isLoading && projectsFiltered.map((project) => (
                                     <div className="app__single" key={project._id}>
                                         <button className="reg--24" onClick={() => handleModal(project)}>
@@ -51,12 +74,6 @@ const FullStack = () => {
                                         </button>
                                     </div>
                     ))
-                }
-
-                {
-                    isLoading &&    <div className="loader">
-                                        <img src={loader} alt={loader}/>
-                                    </div>
                 }
             </div>
             <section className="modal__container" id="modal-container">

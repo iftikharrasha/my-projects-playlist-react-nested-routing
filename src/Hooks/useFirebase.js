@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import initializeFirebase from "../Firebase/firebase.init";
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
@@ -9,6 +9,7 @@ const useFirebase = () => {
     const [loggedInUser, setLoggedInUser] = useState({});
     const [isFetching, setFetching] = useState(true);
     const [authError, setAuthError] = useState('');
+    const [admin, setAdmin] = useState(false);
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
@@ -68,6 +69,12 @@ const useFirebase = () => {
         return () => unsubscribed;
     }, [auth])
 
+    useEffect(() => {
+        fetch(`https://still-peak-02811.herokuapp.com/subscribers/${loggedInUser.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [loggedInUser.email])
+
     const logoutUser = () => {
         setFetching(true);
         signOut(auth).then((res) => {
@@ -95,6 +102,7 @@ const useFirebase = () => {
     } 
 
     return {
+        admin,
         isFetching,
         loggedInUser,
         logoutUser,

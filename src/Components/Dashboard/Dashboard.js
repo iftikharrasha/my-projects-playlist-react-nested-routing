@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import AppDetail from '../AppDetail/AppDetail';
 
-const AppStore = () => {
+const Dashboard = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProjects());
@@ -32,7 +32,7 @@ const AppStore = () => {
             <section className="playlist">
                 <div className="wrapper">
                     <div className="playlist__content" id="playlist">
-                        <h2 className="bigReg--100 text--center">My Projects Playlist</h2>
+                        <h2 className="bigReg--100 text--center">Dashboard</h2>
                         <div className="playlist__container">
                             <div className="playlist__sidebar">
                                 <ul>
@@ -67,4 +67,4 @@ const AppStore = () => {
     );
 };
 
-export default AppStore;
+export default Dashboard;
